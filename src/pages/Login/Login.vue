@@ -1,5 +1,5 @@
 <template>
-    <body class="text-center container">
+    <body class="text-center">
     <form  class="form-signin">
         <h1 class="h2 font-weight-normal mb-3">请先登录</h1>
         <input type="username" class="form-control mb-3" placeholder="用户名" required>
@@ -24,6 +24,7 @@
 <style scoped>
     .form-signin
     {
-        padding: 25%;
+        padding-left: 27%;
+        padding-right: 27%;
     }
 </style>
