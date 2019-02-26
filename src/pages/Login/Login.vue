@@ -18,8 +18,10 @@
             <input type="password" class="form-control mb-1" placeholder="确认密码" required>
             <input type="email" class="form-control mb-1" placeholder="邮箱" required>
         </form>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">{{ Login? '登录' : '确认注册' }}</button>
-        <button class="btn btn-lg btn-block" type="button" @click="Login=!Login">{{ Login? '去注册' : '返回登录' }}</button>
+        <div class="center">
+            <button class="btn btn-lg btn-primary btn-block" type="submit">{{ Login? '登录' : '确认注册' }}</button>
+            <button class="btn btn-lg btn-block" type="button" @click="Login=!Login">{{ Login? '注册' : '返回登录' }}</button>
+        </div>
         <p class="mt-5 mb-3 text-muted">&copy; 2019 上海交通大学软件学院 柳正威</p>
     </div>
     </body>
@@ -40,5 +42,6 @@
    .center{
        padding-left: 30%;
        padding-right: 30%;
+       padding-top: 7%;
    }
 </style>

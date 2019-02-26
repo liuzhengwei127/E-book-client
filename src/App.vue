@@ -1,27 +1,25 @@
 <template>
   <div id="app">
-    <Login/>
+      <Navbar/>
+      <Login/>
   </div>
 </template>
 
 <script>
 import Login from './pages/Login/Login'
+import Navbar from './components/Navbar/Navbar'
 
 export default {
   name: 'app',
   components: {
-    Login
+      Login,
+      Navbar,
   }
 }
 </script>
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+
 }
 </style>
