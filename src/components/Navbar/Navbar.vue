@@ -31,7 +31,7 @@
                 <a class="nav-link" :class="($route.path==='/search')? 'active' : 'text-muted'" href="#/search">书籍搜索</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" :class="($route.path==='/order')? 'active' : 'text-muted'" href="#/order">订单</a>
+                <a class="nav-link" :class="($route.path==='/orders')? 'active' : 'text-muted'" href="#/orders">订单</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" :class="($route.path==='/statistics')? 'active' : 'text-muted'" href="#/statistics">统计</a>

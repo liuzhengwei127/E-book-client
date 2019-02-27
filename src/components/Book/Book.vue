@@ -1,5 +1,5 @@
 <template>
-    <div class="container-fluid modal-header">
+    <div class="container-fluid">
         <div class="row">
             <div class="imgbox col-md-2">
                 <img src="./images/test1.jpg" class="img-thumbnail" alt="Responsive image">
@@ -28,6 +28,7 @@
                 </button>
             </div>
         </div>
+        <hr>
     </div>
 </template>
 
