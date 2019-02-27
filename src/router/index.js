@@ -23,21 +23,21 @@ export default new VueRouter({
             path: '/books',
             component: Books,
             meta: {
-                showFooter: true
+                showNavDetail: true
             }
         },
         {
             path: '/search',
             component: Search,
             meta: {
-                showFooter: true
+                showNavDetail: true
             }
         },
         {
             path: '/order',
             component: Order,
             meta: {
-                showFooter: true
+                showNavDetail: true
             }
         },
         {

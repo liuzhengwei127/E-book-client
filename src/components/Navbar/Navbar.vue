@@ -23,6 +23,20 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
         </nav>
+        <ul class="nav nav-pills nav-fill" v-show="$route.meta.showNavDetail">
+            <li class="nav-item">
+                <a class="nav-link" :class="($route.path==='/books')? 'active' : 'text-muted'" href="#/books">全部书籍</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" :class="($route.path==='/search')? 'active' : 'text-muted'" href="#/search">书籍搜索</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" :class="($route.path==='/order')? 'active' : 'text-muted'" href="#/order">订单</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" :class="($route.path==='/shopcart')? 'active' : 'text-muted'" href="#/shopcart">购物车</a>
+            </li>
+        </ul>
     </div>
 </template>
 

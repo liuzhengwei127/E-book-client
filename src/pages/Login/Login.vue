@@ -19,8 +19,15 @@
             <input type="email" class="form-control mb-1" placeholder="邮箱" required>
         </form>
         <div class="center">
-            <button class="btn btn-lg btn-primary btn-block" type="submit">{{ Login? '登录' : '确认注册' }}</button>
-            <button class="btn btn-lg btn-block" type="button" @click="Login=!Login">{{ Login? '注册' : '返回登录' }}</button>
+            <div v-if="Login">
+                <button class="btn btn-lg btn-primary btn-block" type="submit" @click="$router.push('books')">登录</button>
+                <button class="btn btn-lg btn-block" type="button" @click="Login=!Login">注册</button>
+            </div>
+            <div v-else>
+                <button class="btn btn-lg btn-primary btn-block" type="submit" @click="$router.push('/books')">确认注册</button>
+                <button class="btn btn-lg btn-block" type="button" @click="Login=!Login">返回登录</button>
+            </div>
+
         </div>
         <p class="mt-5 mb-3 text-muted">&copy; 2019 上海交通大学软件学院 柳正威</p>
     </div>
