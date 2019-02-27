@@ -25,16 +25,28 @@
         </nav>
         <ul class="nav nav-pills nav-fill" v-show="$route.meta.showNavDetail">
             <li class="nav-item">
-                <a class="nav-link" :class="($route.path==='/books')? 'active' : 'text-muted'" href="#/books">全部书籍</a>
+                <a class="nav-link" :class="($route.path==='/books')? 'active' : 'text-muted'" href="#/books">
+                    <i class="iconfont icon-shu"></i>
+                    全部书籍
+                </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" :class="($route.path==='/search')? 'active' : 'text-muted'" href="#/search">书籍搜索</a>
+                <a class="nav-link" :class="($route.path==='/search')? 'active' : 'text-muted'" href="#/search">
+                    <i class="iconfont icon-sousuo"></i>
+                    书籍搜索
+                </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" :class="($route.path==='/orders')? 'active' : 'text-muted'" href="#/orders">订单</a>
+                <a class="nav-link" :class="($route.path==='/orders')? 'active' : 'text-muted'" href="#/orders">
+                    <i class="iconfont icon-dingdan"></i>
+                    订单
+                </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" :class="($route.path==='/statistics')? 'active' : 'text-muted'" href="#/statistics">统计</a>
+                <a class="nav-link" :class="($route.path==='/statistics')? 'active' : 'text-muted'" href="#/statistics">
+                    <i class="iconfont icon-tongji2"></i>
+                    统计
+                </a>
             </li>
         </ul>
     </div>
