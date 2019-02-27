@@ -1,22 +1,18 @@
 <template>
   <div id="app">
       <Navbar/>
-      <Books/>
+      <router-view/>
   </div>
 </template>
 
 <script>
-import Login from './pages/Login/Login'
-import Navbar from './components/Navbar/Navbar'
-import Books from './pages/Books/Books'
+    import Navbar from './components/Navbar/Navbar'
 
 export default {
-  name: 'app',
-  components: {
-      Login,
-      Navbar,
-      Books,
-  }
+    name: 'app',
+    components:{
+        Navbar
+    }
 }
 </script>
 

@@ -19,7 +19,7 @@
         </div>
         <nav class="navbar navbar-dark bg-dark">
             <a class="navbar-brand" href="#">E-book在线书店</a>
-            <button class="navbar-toggler" type="button" @click="collapsed=!collapsed">
+            <button class="navbar-toggler" @click="collapsed=!collapsed">
                 <span class="navbar-toggler-icon"></span>
             </button>
         </nav>
