@@ -12,16 +12,18 @@
                 </div>
             </div>
             <div class="col-md-2">
-                <div class="isbn mt-5 mb-4">ISBN:{{book.ISBN}}</div>
+                <div class="isbn mt-3 mb-5">ISBN:{{book.ISBN}}</div>
                 <div class="stock mb-2">库存   {{book.stock}}</div>
                 <div class="price">{{book.price}}元</div>
             </div>
             <div class="col-md-2">
-                <div class="row">
-                    <span class="glyphicon glyphicon-plus"></span>
-                    <div>{{count}}</div> </div>
+                <div class="row mt-5 mb-2">
+                    <i class="iconfont icon-jian col-md-3"></i>
+                    <div class="col-md-6 text-center">{{count}}</div>
+                    <i class="iconfont icon-jia col-md-3"></i>
+                </div>
 
-                <button class="btn btn-danger btn-block mt-5">
+                <button class="btn btn-danger btn-block mt-1">
                     加入购物车
                 </button>
             </div>
