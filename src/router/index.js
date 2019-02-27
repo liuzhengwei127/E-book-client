@@ -5,6 +5,7 @@ import Login from '../pages/Login/Login.vue'
 import Books from '../pages/Books/Books.vue'
 import Search from '../pages/Search/Search.vue'
 import Order from '../pages/Order/Order.vue'
+import Statistics from '../pages/Statistics/Statistics.vue'
 
 
 Vue.use(VueRouter)
@@ -36,6 +37,13 @@ export default new VueRouter({
         {
             path: '/order',
             component: Order,
+            meta: {
+                showNavDetail: true
+            }
+        },
+        {
+            path: '/statistics',
+            component: Statistics,
             meta: {
                 showNavDetail: true
             }

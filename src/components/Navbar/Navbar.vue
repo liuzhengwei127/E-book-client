@@ -34,7 +34,7 @@
                 <a class="nav-link" :class="($route.path==='/order')? 'active' : 'text-muted'" href="#/order">订单</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" :class="($route.path==='/shopcart')? 'active' : 'text-muted'" href="#/shopcart">购物车</a>
+                <a class="nav-link" :class="($route.path==='/statistics')? 'active' : 'text-muted'" href="#/statistics">统计</a>
             </li>
         </ul>
     </div>
