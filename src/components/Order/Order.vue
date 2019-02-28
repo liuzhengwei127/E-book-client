@@ -35,7 +35,11 @@
         },
         computed: {
             total () {
-                return 20
+                let total = 0;
+                this.order.books.forEach((book) => {
+                    total += book.price
+                })
+                return total
             }
         }
     }
