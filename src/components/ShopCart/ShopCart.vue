@@ -4,7 +4,30 @@
             <div v-show="showShopCart" class="shopcart-content">
                 <div class="bg-white shopcart border-right border-secondary">
                     <div>
-                        购物车
+                        <ul class="container-fluid">
+                            <li v-for="(book, index) in books" :key="index" class="list-unstyled row mb-2 mt-1 modal-header">
+                                <div class="imgbox col-md-3">
+                                    <img src="../Book/images/test2.jpg" class="img-thumbnail    ">
+                                </div>
+                                <div class="col-md-5 mt-2">
+                                    <div class="name mb-3">
+                                        {{ book.name }}
+                                    </div>
+                                    <div class="author">
+                                        {{ book.author }}
+                                    </div>
+                                </div>
+                                <div class="col-md-2 mt-3">
+                                    ×{{ book.count }}
+                                </div>
+                                <div class="col-md-2 money mt-3">
+                                    {{ book.money }}元
+                                </div>
+                            </li>
+                        </ul>
+                        <div>
+                            总计{{total}}元
+                        </div>
                     </div>
                 </div>
             </div>
@@ -23,6 +46,8 @@
 </template>
 
 <script>
+    import {mapState} from 'vuex'
+
     export default {
         name: "ShopCart",
         data () {
@@ -33,6 +58,18 @@
         props: {
             orders: Array
         },
+        computed: {
+            ...mapState({
+                books: state => state.ShopCart.books
+            }),
+            total () {
+                let total = 0;
+                this.books.forEach((book) => {
+                    total += book.money
+                })
+                return total
+            }
+        },
         methods: {
             pop () {
                 this.showShopCart = !this.showShopCart
@@ -42,66 +79,99 @@
 </script>
 
 <style scoped>
-.shopcart{
-    height: 600px;
-    width: 200px;
-}
+    .shopcart{
+        height: 100%;
+        width: 360px;
+        position: fixed;
+        left: 0%;
+        top: 0%;
+        float: left;
+        z-index: 999;
+        overflow:scroll;
+    }
 
-.wrap{
-    display: flex;
-}
+    .wrap{
+        display: flex;
+    }
 
-.center{
-    margin: auto;
-}
+    .center{
+        margin: auto;
+    }
 
-.float{
-    width: 50px;
-    height: 50px;
-    border-radius: 50px;
-    float: left;
-    position: fixed;
-    top: 50%;
-    left: 200px;
-}
+    .float{
+        width: 50px;
+        height: 50px;
+        border-radius: 50px;
+        float: left;
+        position: fixed;
+        top: 50%;
+        left: 360px;
+    }
 
-.shopcart-content{
-    width:200px;
-    height: 1200px;
-    position: fixed;
-    left: 0%;
-    top: 0%;
-    float: left;
-    z-index: 999;
-}
+    .shopcart-content{
+        width:200px;
+        height: 1200px;
+        position: fixed;
+        left: 0%;
+        top: 0%;
+        float: left;
+        z-index: 999;
+    }
 
-.shopcart-float{
-    width: 50px;
-    height: 50px;
-    border-radius: 50px;
-    float: left;
-    position: fixed;
-    top: 50%;
-    left: 0%;
-}
+    .shopcart-float{
+        width: 50px;
+        height: 50px;
+        border-radius: 50px;
+        float: left;
+        position: fixed;
+        top: 50%;
+        left: 0%;
+    }
 
-.shopcart-enter-active {
-    transition: all 0.5s ease;
-}
-.shopcart-leave-active {
-    transition: all .5s ease;
-}
-.shopcart-enter, .shopcart-leave-to{
-    transform: translateX(-50px);
-    opacity: 0;
-}
+    .shopcart-enter-active {
+        transition: all 0.5s ease;
+    }
+    .shopcart-leave-active {
+        transition: all .5s ease;
+    }
+    .shopcart-enter, .shopcart-leave-to{
+        transform: translateX(-50px);
+        opacity: 0;
+    }
 
-.float-enter-active {
-    transition: all .8s ease;
-}
+    .float-enter-active {
+        transition: all .8s ease;
+    }
 
-.float-enter, .float-leave-to{
-    transform: translateX(60px);
-    opacity: 0;
-}
+    .float-enter, .float-leave-to{
+        transform: translateX(60px);
+        opacity: 0;
+    }
+
+    .imgbox{
+        font-size: 0;
+        width: 80px;
+        height: 80px;
+        text-align: center;
+    }
+    .imgbox img{
+        max-height: 100%;
+        max-width: 100%;
+        vertical-align: middle;
+    }
+
+    .name{
+        font-family: 等线;
+        font-size: 13px;
+    }
+
+    .author{
+        font-family: 仿宋;
+        font-size: 10px;
+    }
+
+    .money{
+        font-family: 黑体;
+        font-size: 12px;
+    }
 </style>

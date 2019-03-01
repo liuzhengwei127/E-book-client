@@ -18,12 +18,12 @@
             </div>
             <div class="col-md-2">
                 <div class="row mt-5 mb-2">
-                    <i class="iconfont icon-jian col-md-3"></i>
+                    <i class="iconfont icon-jian col-md-3" @click="substract" :style="count>1? 'cursor: pointer':''"></i>
                     <div class="col-md-6 text-center">{{count}}</div>
-                    <i class="iconfont icon-jia col-md-3"></i>
+                    <i class="iconfont icon-jia col-md-3" @click="add" style="cursor: pointer"></i>
                 </div>
 
-                <button class="btn btn-danger btn-block mt-1">
+                <button class="btn btn-danger btn-block mt-1" @click="addtocart">
                     加入购物车
                 </button>
             </div>
@@ -41,6 +41,26 @@
         data() {
             return {
                 count: 1,
+            }
+        },
+        methods: {
+            substract () {
+                if (this.count > 1)
+                    this.count--
+            },
+
+            add () {
+                this.count++
+            },
+
+            addtocart () {
+                this.$store.commit('ShopCart/addtocart', {
+                    cover: this.book.cover,
+                    name: this.book.name,
+                    author: this.book.author,
+                    count: this.count,
+                    money: this.count*this.book.price
+                })
             }
         }
     }

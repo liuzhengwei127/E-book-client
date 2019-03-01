@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import ShopCart from './modules/modules'
+import ShopCart from './modules/ShopCart'
 
 Vue.use(Vuex)
 
