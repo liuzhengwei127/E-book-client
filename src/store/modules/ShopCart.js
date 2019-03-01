@@ -5,7 +5,8 @@ const state = {
 const mutations = {
     addtocart(state, book) {
         state.books.push(book)
-    }
+    },
+
 }
 
 

@@ -5,27 +5,36 @@
                 <div class="bg-white shopcart border-right border-secondary">
                     <div>
                         <ul class="container-fluid">
-                            <li v-for="(book, index) in books" :key="index" class="list-unstyled row mb-2 mt-1 modal-header">
-                                <div class="imgbox col-md-3">
-                                    <img src="../Book/images/test2.jpg" class="img-thumbnail    ">
-                                </div>
-                                <div class="col-md-5 mt-2">
-                                    <div class="name mb-3">
-                                        {{ book.name }}
+                            <li v-for="(book, index) in books" :key="index" class="list-unstyled mb-2 mt-1 ">
+                                <div class="row">
+                                    <div class="imgbox col-md-3">
+                                        <img src="../Book/images/test2.jpg" class="img-thumbnail">
                                     </div>
-                                    <div class="author">
-                                        {{ book.author }}
+                                    <div class="col-md-5 mt-2">
+                                        <div class="name mb-3">
+                                            {{ book.name }}
+                                        </div>
+                                        <div class="author">
+                                            {{ book.author }}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 mt-3">
+                                        ×{{ book.count }}
+                                    </div>
+                                    <div class="col-md-2 money mt-3">
+                                        {{ book.money }}元
                                     </div>
                                 </div>
-                                <div class="col-md-2 mt-3">
-                                    ×{{ book.count }}
+                                <div class="row">
+                                    <div class="col-md-10"></div>
+                                    <div class="col-md-1">
+                                        <i class="iconfont icon-shanchu text-danger" style="cursor: pointer" @click="deletebook"></i>
+                                    </div>
                                 </div>
-                                <div class="col-md-2 money mt-3">
-                                    {{ book.money }}元
-                                </div>
+                                <hr>
                             </li>
                         </ul>
-                        <div>
+                        <div class="mt-3 mb-3 total">
                             总计{{total}}元
                         </div>
                     </div>
@@ -33,12 +42,12 @@
             </div>
         </transition>
         <transition name="shopcart">
-                <div  class="bg-danger float wrap"  @click="pop" v-show="showShopCart">
+                <div  class="bg-danger float wrap" style="cursor: pointer"  @click="pop" v-show="showShopCart">
                     <i class="iconfont icon-gouwuche center"></i>
                 </div>
         </transition>
         <transition name="float">
-            <div  class="shopcart-float bg-danger wrap"  @click="pop" v-show="!showShopCart">
+            <div  class="shopcart-float bg-danger wrap" style="cursor: pointer" @click="pop" v-show="!showShopCart">
                     <i class="iconfont icon-gouwuche center"></i>
             </div>
         </transition>
@@ -73,6 +82,9 @@
         methods: {
             pop () {
                 this.showShopCart = !this.showShopCart
+            },
+
+            deletebook () {
             }
         }
     }
@@ -173,5 +185,10 @@
     .money{
         font-family: 黑体;
         font-size: 12px;
+    }
+
+    .total{
+        font-family: 仿宋;
+        font-size: 18px;
     }
 </style>
