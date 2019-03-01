@@ -6,23 +6,27 @@
                     <div>
                         <ul class="container-fluid">
                             <li v-for="(book, index) in books" :key="index" class="list-unstyled mb-2 mt-1 ">
-                                <div class="row">
+                                <div class="row mt-3">
                                     <div class="imgbox col-md-3">
                                         <img src="../Book/images/test2.jpg" class="img-thumbnail">
                                     </div>
-                                    <div class="col-md-5 mt-2">
-                                        <div class="name mb-3">
-                                            {{ book.name }}
+                                    <div class="col-md-6">
+                                        <div class="col-md-12">
+                                            <div class="mb-2">
+                                                <div class="name">
+                                                    {{ book.name }}
+                                                </div>
+                                                <div class="author">
+                                                    {{ book.author }}
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="author">
-                                            {{ book.author }}
+                                        <div class="col-md-12">
+                                            ×{{ book.count }}
                                         </div>
                                     </div>
-                                    <div class="col-md-2 mt-3">
-                                        ×{{ book.count }}
-                                    </div>
-                                    <div class="col-md-2 money mt-3">
-                                        {{ book.money }}元
+                                    <div class="money col-md-2 ml-1">
+                                        ￥{{ book.money }}
                                     </div>
                                 </div>
                                 <div class="row">
@@ -34,20 +38,32 @@
                                 <hr>
                             </li>
                         </ul>
-                        <div class="mt-3 mb-3 total">
-                            总计{{total}}元
+                        <div class="mt-3 mb-3 row" v-show="total!=0">
+                            <div class="col-md-8 text-center mt-2">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="totaltxt mt-1">总计</div>
+                                        <div class="text-danger totalmoney">￥{{total}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-danger col-md-3">
+                                提交订单
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
         </transition>
         <transition name="shopcart">
-                <div  class="bg-danger float wrap" style="cursor: pointer"  @click="pop" v-show="showShopCart">
+                <div  class="bg-danger float wrap" style="cursor: pointer"  @click="showShopCart = !showShopCart"
+                      v-show="showShopCart">
                     <i class="iconfont icon-gouwuche center"></i>
                 </div>
         </transition>
         <transition name="float">
-            <div  class="shopcart-float bg-danger wrap" style="cursor: pointer" @click="pop" v-show="!showShopCart">
+            <div  class="shopcart-float bg-danger wrap" style="cursor: pointer" @click="showShopCart = !showShopCart"
+                  v-show="!showShopCart">
                     <i class="iconfont icon-gouwuche center"></i>
             </div>
         </transition>
@@ -80,11 +96,8 @@
             }
         },
         methods: {
-            pop () {
-                this.showShopCart = !this.showShopCart
-            },
-
             deletebook () {
+                this.$store.commit('ShopCart/deletebook', this.index)
             }
         }
     }
@@ -174,21 +187,29 @@
 
     .name{
         font-family: 等线;
-        font-size: 13px;
+        font-size: 16px;
     }
 
     .author{
         font-family: 仿宋;
-        font-size: 10px;
+        font-size: 14px;
     }
 
     .money{
-        font-family: 黑体;
-        font-size: 12px;
+        font-family: tohoma,arial;
+        font-size: 15px;
     }
 
-    .total{
+    .totaltxt{
         font-family: 仿宋;
         font-size: 18px;
+        padding-right: 10px;
+        padding-left: 10px;
+    }
+
+    .totalmoney{
+        font-weight: 700;
+        font-size: 22px;
+        font-family: tohoma,arial;
     }
 </style>

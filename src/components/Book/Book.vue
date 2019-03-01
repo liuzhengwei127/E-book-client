@@ -22,7 +22,6 @@
                     <div class="col-md-6 text-center">{{count}}</div>
                     <i class="iconfont icon-jia col-md-3" @click="add" style="cursor: pointer"></i>
                 </div>
-
                 <button class="btn btn-danger btn-block mt-1" @click="addtocart">
                     加入购物车
                 </button>
