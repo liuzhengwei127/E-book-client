@@ -1,14 +1,14 @@
 <template>
-    <div>
+    <div v-if="$route.path != '/login'">
         <transition name="shopcart">
             <div v-show="showShopCart" class="shopcart-content">
                 <div class="bg-white shopcart border-right border-secondary">
-                    <div>
+                    <div v-show="books.length">
                         <ul class="container-fluid">
                             <li v-for="(book, index) in books" :key="index" class="list-unstyled mb-2 mt-1 ">
                                 <div class="row mt-3">
                                     <div class="imgbox col-md-3">
-                                        <img src="../Book/images/test2.jpg" class="img-thumbnail">
+                                        <img :src="book.cover" class="img-thumbnail">
                                     </div>
                                     <div class="col-md-6">
                                         <div class="col-md-12">
@@ -32,7 +32,7 @@
                                 <div class="row">
                                     <div class="col-md-10"></div>
                                     <div class="col-md-1">
-                                        <i class="iconfont icon-shanchu text-danger" style="cursor: pointer" @click="deletebook"></i>
+                                        <i class="iconfont icon-shanchu text-danger" style="cursor: pointer" @click="deletebook(index)"></i>
                                     </div>
                                 </div>
                                 <hr>
@@ -50,6 +50,12 @@
                             <button type="button" class="btn btn-danger col-md-3">
                                 提交订单
                             </button>
+                        </div>
+                    </div>
+                    <div v-show="books.length === 0">
+                        <div class="mt-4 text-center">
+                            <i class="iconfont icon-gouwuche1"></i>
+                            购物车为空
                         </div>
                     </div>
                 </div>
@@ -96,8 +102,8 @@
             }
         },
         methods: {
-            deletebook () {
-                this.$store.commit('ShopCart/deletebook', this.index)
+            deletebook (index) {
+                this.$store.commit('ShopCart/deletebook', index)
             }
         }
     }
@@ -112,7 +118,22 @@
         top: 0%;
         float: left;
         z-index: 999;
-        overflow:scroll;
+        overflow: auto;
+    }
+
+    .shopcart::-webkit-scrollbar {/*滚动条整体样式*/
+        width: 4px;     /*高宽分别对应横竖滚动条的尺寸*/
+        height: 4px;
+    }
+    .shopcart::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+        border-radius: 5px;
+        -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+        background: rgba(0,0,0,0.2);
+    }
+    .shopcart::-webkit-scrollbar-track {/*滚动条里面轨道*/
+        -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+        border-radius: 0;
+        background: rgba(0,0,0,0.1);
     }
 
     .wrap{
@@ -211,5 +232,13 @@
         font-weight: 700;
         font-size: 22px;
         font-family: tohoma,arial;
+    }
+
+    .empty{
+        height: 100%;
+    }
+
+    .empty-content{
+        height: 20%;
     }
 </style>

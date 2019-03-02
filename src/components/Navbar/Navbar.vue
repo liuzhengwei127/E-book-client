@@ -18,7 +18,12 @@
             </div>
         </div>
         <nav class="navbar navbar-dark bg-dark">
-            <a class="navbar-brand" href="#">E-book在线书店</a>
+            <a class="navbar-brand" href="#">
+                <div class="row">
+                   <i class="iconfont icon-shuji mt-1 mr-2 ml-2"></i>
+                    E-book在线书店
+                </div>
+            </a>
             <button class="navbar-toggler" @click="collapsed=!collapsed">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -64,5 +69,15 @@
 </script>
 
 <style scoped>
-
+    .imgbox{
+        font-size: 0;
+        width: 20px;
+        height: 20px;
+        text-align: center;
+    }
+    .imgbox img{
+        max-height: 100%;
+        max-width: 100%;
+        vertical-align: middle;
+    }
 </style>
