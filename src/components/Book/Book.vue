@@ -58,6 +58,7 @@
                     name: this.book.name,
                     author: this.book.author,
                     count: this.count,
+                    price: this.book.price,
                     money: this.count*this.book.price
                 })
             }

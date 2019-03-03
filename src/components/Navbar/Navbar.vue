@@ -69,15 +69,5 @@
 </script>
 
 <style scoped>
-    .imgbox{
-        font-size: 0;
-        width: 20px;
-        height: 20px;
-        text-align: center;
-    }
-    .imgbox img{
-        max-height: 100%;
-        max-width: 100%;
-        vertical-align: middle;
-    }
+
 </style>

@@ -22,7 +22,9 @@
                                             </div>
                                         </div>
                                         <div class="col-md-12">
+                                            <i class="iconfont icon-jian" @click="substract(book.count, index)" :style="book.count>1? 'cursor: pointer':''"></i>
                                             ×{{ book.count }}
+                                            <i class="iconfont icon-jia" @click="add(index)" style="cursor: pointer"></i>
                                         </div>
                                     </div>
                                     <div class="money col-md-2 ml-1">
@@ -104,7 +106,16 @@
         methods: {
             deletebook (index) {
                 this.$store.commit('ShopCart/deletebook', index)
-            }
+            },
+
+            substract (count, index) {
+                if (count > 1)
+                    this.$store.commit('ShopCart/substract', index)
+            },
+
+            add (index) {
+                this.$store.commit('ShopCart/add', index)
+            },
         }
     }
 </script>

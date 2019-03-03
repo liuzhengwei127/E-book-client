@@ -16,8 +16,19 @@ const mutations = {
         if (!repeat)
             state.books.push(book)
     },
+
     deletebook(state, index) {
         state.books.splice(index, 1)
+    },
+
+    add(state, index){
+        state.books[index].count++
+        state.books[index].money+= state.books[index].price
+    },
+
+    substract(state, index){
+        state.books[index].count--
+        state.books[index].money-= state.books[index].price
     }
 }
 
