@@ -22,9 +22,10 @@
                                             </div>
                                         </div>
                                         <div class="col-md-12">
-                                            <i class="iconfont icon-jian" @click="substract(book.count, index)" :style="book.count>1? 'cursor: pointer':''"></i>
+                                            <i class="iconfont icon-jian" @click="substract(book.count, index)" :style="book.count>1? 'cursor: pointer':''"
+                                               :class="book.count>1? 'text-danger':''"></i>
                                             ×{{ book.count }}
-                                            <i class="iconfont icon-jia" @click="add(index)" style="cursor: pointer"></i>
+                                            <i class="iconfont icon-jia text-danger" @click="add(index)" style="cursor: pointer"></i>
                                         </div>
                                     </div>
                                     <div class="money col-md-2 ml-1">
