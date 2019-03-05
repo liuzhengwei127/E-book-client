@@ -10,7 +10,7 @@
             <ul class="nav nav-fill nav-pills" v-show="$route.meta.showNavDetail">
                 <li class="nav-item">
                     <a class="nav-link" :class="($route.path==='/home')? 'active' : 'text-muted'" href="#/home">
-                        <i class="iconfont"></i>
+                        <i class="iconfont icon-shouye"></i>
                         首页
                     </a>
                 </li>

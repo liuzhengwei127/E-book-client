@@ -20,11 +20,11 @@
         </form>
         <div class="center">
             <div v-if="Login">
-                <button class="btn btn-lg btn-primary btn-block" type="submit" @click="$router.push('books')">登录</button>
+                <button class="btn btn-lg btn-primary btn-block" type="submit" @click="$router.push('/home')">登录</button>
                 <button class="btn btn-lg btn-block" type="button" @click="Login=!Login">注册</button>
             </div>
             <div v-else>
-                <button class="btn btn-lg btn-primary btn-block" type="submit" @click="$router.push('/books')">确认注册</button>
+                <button class="btn btn-lg btn-primary btn-block" type="submit" @click="$router.push('/home')">确认注册</button>
                 <button class="btn btn-lg btn-block" type="button" @click="Login=!Login">返回登录</button>
             </div>
 
