@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
+import Home from '../pages/Home/Home.vue'
 import Login from '../pages/Login/Login.vue'
 import Books from '../pages/Books/Books.vue'
 import Search from '../pages/Search/Search.vue'
@@ -18,6 +19,13 @@ export default new VueRouter({
             component: Login,
             meta: {
                 showNavDetail: false,
+            }
+        },
+        {
+            path: '/home',
+            component: Home,
+            meta: {
+                showNavDetail: true,
             }
         },
         {
@@ -50,7 +58,7 @@ export default new VueRouter({
         },
         {
             path: '/',
-            redirect: '/login'
+            redirect: '/home'
         },
     ]
 })

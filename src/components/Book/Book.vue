@@ -18,7 +18,7 @@
             </div>
             <div class="col-md-2">
                 <div class="row mt-5 mb-2">
-                    <i class="iconfont icon-jian col-md-3" @click="substract" :style="count>1? 'cursor: pointer':''" :class="count>1? 'text-danger':''"></i>
+                    <i class="iconfont icon-jian col-md-3" @click="substract" :style="count>1? 'cursor: pointer':''" :class="count>1?'text-danger':''"></i>
                     <div class="col-md-6 text-center">{{count}}</div>
                     <i class="iconfont icon-jia col-md-3 text-danger" @click="add" style="cursor: pointer"></i>
                 </div>
