@@ -13,6 +13,7 @@
 
 <script>
     import Book from '../../components/Book/Book'
+
     export default {
         name: "Books",
         data () {

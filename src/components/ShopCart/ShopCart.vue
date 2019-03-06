@@ -164,6 +164,7 @@
         position: fixed;
         top: 50%;
         left: 360px;
+        z-index: 999;
     }
 
     .shopcart-content{
@@ -184,6 +185,7 @@
         position: fixed;
         top: 50%;
         left: 0%;
+        z-index: 999;
     }
 
     .shopcart-enter-active {

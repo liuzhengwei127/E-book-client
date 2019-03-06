@@ -40,7 +40,10 @@
                 </li>
             </ul>
             <div>
-                <a href="#/login">登录/注册</a>
+                <a href="#/login" class="card-link">
+                    <i class="iconfont icon-denglu"></i>
+                    登录/注册
+                </a>
             </div>
         </nav>
     </div>
