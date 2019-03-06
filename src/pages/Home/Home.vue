@@ -2,8 +2,9 @@
     <div class="container-fluid py-5">
         <div class="row justify-content-center py-5">
             <div class="text-center col-md-12">
-                <h1>E-Book</h1>
-                <span>一个线上沉浸交互式新风格书店</span>
+                <div class="title">E-Book</div>
+                <div class="subtitle mb-5">一个沉浸交互式新风格线上书店</div>
+                <div class="text">你想要的 都是我们所努力的</div>
             </div>
             <div class="mt-4">
                 <button class="btn btn-primary" @click="$router.push('/books')">立即开始探索</button>
@@ -19,8 +20,17 @@
 </script>
 
 <style scoped>
-    .home{
-        width: 100%;
-        height: 500px;
+    .title{
+        font-family: Calibri;
+        font: 72px bold;
+    }
+
+    .subtitle{
+        font-size: 16px;
+        font-family: 等线;
+    }
+
+    .text{
+        font-size: 20px;
     }
 </style>
