@@ -1,15 +1,15 @@
 <template>
     <div class="container-fluid">
         <div class="row">
-            <div class="imgbox col-md-2">
-                <img :src="book.cover" class="img-thumbnail" alt="Responsive image" @click="dialogVisible=!dialogVisible">
+            <div class="imgbox col-md-2" style="cursor: pointer" @click="dialogVisible=!dialogVisible">
+                <img :src="book.cover" class="img-thumbnail" alt="Responsive image">
             </div>
-            <div class="col-md-6">
-                <a class="card-link">
+            <div class="col-md-6" style="cursor: pointer"  @click="dialogVisible=!dialogVisible">
+                <div class="card-link">
                     <div class="name mt-3 mb-2">{{book.name}}</div>
                     <div class="author mb-1">作者:{{book.author}}</div>
                     <div class="outline">简介:{{book.outline}}</div>
-                </a>
+                </div>
             </div>
             <div class="col-md-2">
                 <div class="isbn mt-3 mb-5">ISBN:{{book.ISBN}}</div>
