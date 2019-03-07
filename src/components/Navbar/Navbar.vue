@@ -1,5 +1,16 @@
 <template>
     <div>
+        <div v-show="collapsed" class="collapsed">
+            <el-row>
+                <el-col :span="4" :offset="20">
+                    <el-row type="flex" justify="end">
+                        <el-col :span="8">
+                            <el-button size="mini" type="danger" plain circle @click="logout">注销</el-button>
+                        </el-col>
+                    </el-row>
+                </el-col>
+            </el-row>
+        </div>
         <nav class="navbar navbar-light border-bottom">
             <a class="navbar-brand" href="#">
                 <div class="row">
@@ -45,10 +56,9 @@
                     登录/注册
                 </a>
                 <div class="row mr-0" v-else>
-                    <div class="mt-1">
+                    <div class="mt-1 text-primary" @click="collapsed=!collapsed" style="cursor: pointer">
                         <i class="iconfont icon-iconfontgerenzhongxin mr-2"></i>
                     </div>
-                    <el-button size="mini" type="danger" plain circle @click="logout">注销</el-button>
                 </div>
             </div>
         </nav>
@@ -80,5 +90,7 @@
 </script>
 
 <style scoped>
-
+    .collapsed{
+        height: 15vh;
+    }
 </style>

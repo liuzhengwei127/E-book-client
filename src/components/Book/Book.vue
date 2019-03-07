@@ -94,6 +94,10 @@
                     price: this.book.price,
                     money: this.count*this.book.price
                 })
+                this.$message({
+                    message: '成功加入购物车',
+                    type: 'success'
+                });
             }
         }
     }
