@@ -101,8 +101,11 @@
         },
         methods: {
             login () {
-                if (this.SignUp.account='liuzhengwei' && this.SignUp.password='990127')
-                    
+                if (this.SignUp.account==='liuzhengwei' && this.SignUp.password==='990127')
+                    this.$store.commit('Person/changeManager')
+
+                this.$store.commit('Person/changeLogin')
+                this.$router.push('/home')
             },
         }
     }

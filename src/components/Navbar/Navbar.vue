@@ -40,9 +40,12 @@
                 </li>
             </ul>
             <div>
-                <a href="#/login" class="card-link">
+                <a href="#/login" class="card-link" v-if="!isLogin">
                     <i class="iconfont icon-denglu"></i>
                     登录/注册
+                </a>
+                <a v-else>
+                    <i class="iconfont icon-iconfontgerenzhongxin"></i>
                 </a>
             </div>
         </nav>
@@ -50,12 +53,20 @@
 </template>
 
 <script>
+    import {mapState} from 'vuex'
+
     export default {
         name: "Navbar",
         data () {
             return {
                 collapsed: false,
             }
+        },
+        computed: {
+            ...mapState({
+                isLogin: state => state.Person.isLogin,
+                isManager: state => state.Person.isManager,
+            }),
         }
     }
 </script>
