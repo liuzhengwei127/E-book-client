@@ -44,9 +44,12 @@
                     <i class="iconfont icon-denglu"></i>
                     登录/注册
                 </a>
-                <a v-else>
-                    <i class="iconfont icon-iconfontgerenzhongxin"></i>
-                </a>
+                <div class="row mr-0" v-else>
+                    <div class="mt-1">
+                        <i class="iconfont icon-iconfontgerenzhongxin mr-2"></i>
+                    </div>
+                    <el-button size="mini" type="danger" plain @click="logout">注销</el-button>
+                </div>
             </div>
         </nav>
     </div>
@@ -67,6 +70,11 @@
                 isLogin: state => state.Person.isLogin,
                 isManager: state => state.Person.isManager,
             }),
+        },
+        methods: {
+            logout () {
+                this.$store.commit('Person/changeLogin')
+            }
         }
     }
 </script>

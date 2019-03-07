@@ -1,14 +1,14 @@
 <template>
     <body class="text-center">
     <div class="center">
-        <el-form v-show="Login" :model="SignUp" label-width="80px">
+        <el-form v-show="Login" :model="SignUp" label-width="80px" ref="SignUp" :rules="rules">
             <el-form-item>
                 <h1 class="h2 font-weight-normal mb-5">请先登录</h1>
             </el-form-item>
-            <el-form-item label="用户名">
+            <el-form-item label="用户名" prop="account">
                 <el-input placeholder="请输入用户名" v-model="SignUp.account"></el-input>
             </el-form-item>
-            <el-form-item label="密码">
+            <el-form-item label="密码" prop="password">
                 <el-input placeholder="请输入密码" v-model="SignUp.password" show-password></el-input>
             </el-form-item>
             <el-form-item>
@@ -20,7 +20,7 @@
             </el-form-item>
             <el-form-item>
                 <div class="center">
-                    <button class="btn btn-lg btn-primary btn-block" type="submit" @click="login">登录</button>
+                    <button class="btn btn-lg btn-primary btn-block" type="submit" @click="signup('SignUp')">登录</button>
                     <button class="btn btn-lg btn-block" type="button" @click="Login=!Login">注册</button>
                 </div>
             </el-form-item>
@@ -46,7 +46,7 @@
             </el-form-item>
             <el-form-item>
                 <div class="center">
-                    <button class="btn btn-lg btn-primary btn-block" type="submit" @click="$router.push('/home')">确认注册</button>
+                    <button class="btn btn-lg btn-primary btn-block" type="submit" @click="signin">确认注册</button>
                     <button class="btn btn-lg btn-block" type="button" @click="Login=!Login">返回登录</button>
                 </div>
             </el-form-item>
@@ -100,13 +100,31 @@
             }
         },
         methods: {
-            login () {
-                if (this.SignUp.account==='liuzhengwei' && this.SignUp.password==='990127')
-                    this.$store.commit('Person/changeManager')
+            signup(formName) {
+                this.$refs[formName].validate((valid) => {
+                    if (valid) {
+                        if (this.SignUp.account === 'liuzhengwei' && this.SignUp.password === '990127')
+                            this.$store.commit('Person/changeManager')
 
-                this.$store.commit('Person/changeLogin')
-                this.$router.push('/home')
+                        this.$store.commit('Person/changeLogin')
+                        this.$router.push('/home')
+                    } else {
+                        console.log('error submit!!');
+                        return false;
+                    }
+
+                })
             },
+            signin(formName){
+                this.$refs[formName].validate((valid) => {
+                    if (valid) {
+                        this.$router.push('/home')
+                    } else {
+                        console.log('error submit!!');
+                        return false;
+                    }
+                })
+            }
         }
     }
 </script>
