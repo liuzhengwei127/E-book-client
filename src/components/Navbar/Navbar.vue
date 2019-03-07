@@ -1,16 +1,5 @@
 <template>
     <div>
-        <div v-show="collapsed" class="collapsed">
-            <el-row>
-                <el-col :span="4" :offset="20">
-                    <el-row type="flex" justify="end">
-                        <el-col :span="8">
-                            <el-button size="mini" type="danger" plain circle @click="logout">注销</el-button>
-                        </el-col>
-                    </el-row>
-                </el-col>
-            </el-row>
-        </div>
         <nav class="navbar navbar-light border-bottom">
             <a class="navbar-brand" href="#">
                 <div class="row">
@@ -56,9 +45,22 @@
                     登录/注册
                 </a>
                 <div class="row mr-0" v-else>
-                    <div class="mt-1 text-primary" @click="collapsed=!collapsed" style="cursor: pointer">
-                        <i class="iconfont icon-iconfontgerenzhongxin mr-2"></i>
-                    </div>
+                    <el-dropdown class="mr-3" style="cursor: pointer" trigger="click">
+                        <span class="el-dropdown-link">
+                            <i class="iconfont icon-iconfontgerenzhongxin text-primary"></i>
+                            <i class="el-icon-arrow-down el-icon--right"></i>
+                        </span>
+                        <el-dropdown-menu slot="dropdown">
+                            <el-dropdown-item>敬请期待</el-dropdown-item>
+                            <el-dropdown-item>敬请期待</el-dropdown-item>
+                            <el-dropdown-item divided>
+                                <div @click="logout">
+                                    <i class="iconfont icon-tuichu text-danger"></i>
+                                    退出登录
+                                </div>
+                            </el-dropdown-item>
+                        </el-dropdown-menu>
+                    </el-dropdown>
                 </div>
             </div>
         </nav>
