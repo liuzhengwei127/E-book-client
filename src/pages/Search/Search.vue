@@ -4,11 +4,11 @@
             书籍搜索
         </div>
         <div class="row mt-5">
-            <div class="mt-1">
+            <div class="mt-2">
                 <i class="iconfont icon-sousuo col-md-9"></i>
             </div>
             <input type="text" class="form-control col-md-10">
-            <button class="btn btn-info btn-block ml-2 col-md-1">搜索</button>
+            <button class="btn btn-primary btn-block ml-2 col-md-1">搜索</button>
         </div>
     </div>
 </template>
