@@ -48,7 +48,7 @@
                     <div class="mt-1">
                         <i class="iconfont icon-iconfontgerenzhongxin mr-2"></i>
                     </div>
-                    <el-button size="mini" type="danger" plain @click="logout">注销</el-button>
+                    <el-button size="mini" type="danger" plain circle @click="logout">注销</el-button>
                 </div>
             </div>
         </nav>
