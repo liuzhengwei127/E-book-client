@@ -41,12 +41,12 @@
                                 <hr>
                             </li>
                         </ul>
-                        <div class="mt-3 mb-3 row" v-show="total!=0">
+                        <div class="mt-3 mb-3 row" v-show="total.total_money!=0">
                             <div class="col-md-8 text-center mt-2">
                                 <div class="container">
                                     <div class="row">
                                         <div class="totaltxt mt-1">总计</div>
-                                        <div class="text-danger totalmoney">￥{{total}}</div>
+                                        <div class="text-danger totalmoney">￥{{total.total_money}}</div>
                                     </div>
                                 </div>
                             </div>
@@ -67,13 +67,17 @@
         <transition name="shopcart">
                 <div  class="bg-danger float wrap" style="cursor: pointer"  @click="showShopCart = !showShopCart"
                       v-show="showShopCart">
-                    <i class="iconfont icon-gouwuche center"></i>
+                    <el-badge :value="total.total_books" class="center" :hidden="total.total_books === 0">
+                        <i class="iconfont icon-gouwuche"></i>
+                    </el-badge>
                 </div>
         </transition>
         <transition name="float">
             <div  class="shopcart-float bg-danger wrap" style="cursor: pointer" @click="showShopCart = !showShopCart"
                   v-show="!showShopCart">
-                    <i class="iconfont icon-gouwuche center"></i>
+                <el-badge :value="total.total_books" class="center" :hidden="total.total_books === 0">
+                    <i class="iconfont icon-gouwuche"></i>
+                </el-badge>
             </div>
         </transition>
     </div>
@@ -97,12 +101,15 @@
                 books: state => state.ShopCart.books
             }),
             total () {
-                let total = 0;
+                let total_money = 0;
+                let total_books = 0;
                 this.books.forEach((book) => {
-                    total += book.money
+                    total_money += book.money
+                    total_books += book.count
                 })
-                return total
-            }
+                return {total_money,total_books}
+            },
+
         },
         methods: {
             deletebook (index) {
@@ -131,21 +138,6 @@
         float: left;
         z-index: 999;
         overflow: auto;
-    }
-
-    .shopcart::-webkit-scrollbar {/*滚动条整体样式*/
-        width: 4px;     /*高宽分别对应横竖滚动条的尺寸*/
-        height: 4px;
-    }
-    .shopcart::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
-        border-radius: 5px;
-        -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
-        background: rgba(0,0,0,0.2);
-    }
-    .shopcart::-webkit-scrollbar-track {/*滚动条里面轨道*/
-        -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
-        border-radius: 0;
-        background: rgba(0,0,0,0.1);
     }
 
     .wrap{
@@ -246,13 +238,5 @@
         font-weight: 700;
         font-size: 22px;
         font-family: tohoma,arial;
-    }
-
-    .empty{
-        height: 100%;
-    }
-
-    .empty-content{
-        height: 20%;
     }
 </style>

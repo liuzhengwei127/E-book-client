@@ -37,7 +37,7 @@
                 title="书籍详情"
                 :visible.sync="dialogVisible"
                 width="50%">
-            <div class="row">
+            <div class="row mb-3">
                 <div class="imgbox col-md-4 mt-5">
                     <img :src="book.cover" class="img-thumbnail">
                 </div>
@@ -54,14 +54,16 @@
                     <div class="outline mt-1">
                         简介：{{book.outline}}
                     </div>
+                    <div class="mt-2">
+                        库存:{{book.stock}}
+                    </div>
                 </div>
             </div>
-            <span slot="footer" class="dialog-footer">
+            <span slot="footer" class="dialog-footer" v-if="!isManager">
                 <el-row>
                     <el-col :span="24" class="mb-2"><el-input-number v-model="count" controls-position="right" :min="1" size="mini"></el-input-number></el-col>
                     <el-button type="danger" class="mr-2" @click="addtocart">加入购物车</el-button>
                 </el-row>
-
             </span>
         </el-dialog>
     </div>

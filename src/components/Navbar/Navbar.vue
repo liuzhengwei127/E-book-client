@@ -99,13 +99,13 @@
                 this.$store.commit('Person/changeLogin')
                 if (this.isManager)
                     this.$store.commit('Person/changeManager')
+
+                this.$router.push('/home')
             }
         }
     }
 </script>
 
 <style scoped>
-    .collapsed{
-        height: 15vh;
-    }
+
 </style>
