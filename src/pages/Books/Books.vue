@@ -2,6 +2,9 @@
     <div class="container-fluid">
         <div class="mt-5">
             书籍浏览
+            <el-button type="primary" class="ml-3">
+                添加书籍
+            </el-button>
         </div>
         <ul  class="mt-5">
             <li v-for="(book, index) in books" :key="index" class="list-unstyled mb-5">
