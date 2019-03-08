@@ -27,21 +27,15 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" :class="($route.path==='/orders')? 'active' : 'text-muted'" href="#/orders">
-                        <i class="iconfont icon-dingdan"></i>
-                        订单
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" :class="($route.path==='/statistics')? 'active' : 'text-muted'" href="#/statistics">
-                        <i class="iconfont icon-tongji2"></i>
-                        统计
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" :class="($route.path==='/statistics')? 'active' : 'text-muted'" href="#/statistics" v-if="isManager">
+                    <a class="nav-link" :class="($route.path==='/users')? 'active' : 'text-muted'" href="#/users" v-if="isManager">
                         <i class="iconfont icon-guanli"></i>
                         用户管理
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" :class="($route.path==='/about')? 'active' : 'text-muted'" href="#/about">
+                        <i class="iconfont icon-guanyu"></i>
+                        关于
                     </a>
                 </li>
             </ul>
@@ -54,12 +48,22 @@
                     <el-dropdown class="mr-3" style="cursor: pointer" trigger="click">
                         <span class="el-dropdown-link">
                             <i class="iconfont icon-guanliyuan text-primary" v-if="isManager"></i>
-                            <i class="iconfont icon-iconfontgerenzhongxin text-primary" v-else></i>
+                            <i class="iconfont icon-geren text-primary" v-else></i>
                             <i class="el-icon-arrow-down el-icon--right"></i>
                         </span>
                         <el-dropdown-menu slot="dropdown">
-                            <el-dropdown-item>敬请期待</el-dropdown-item>
-                            <el-dropdown-item>敬请期待</el-dropdown-item>
+                            <el-dropdown-item>
+                                <div :class="($route.path==='/orders')? 'active' : 'text-muted'" @click="$router.push('/orders')">
+                                    <i class="iconfont icon-dingdan"></i>
+                                    {{ isManager? '所有': '' }}订单
+                                </div>
+                            </el-dropdown-item>
+                            <el-dropdown-item>
+                                <div :class="($route.path==='/statistics')? 'active' : 'text-muted'" @click="$router.push('/statistics')">
+                                    <i class="iconfont icon-tongji2"></i>
+                                    统计
+                                </div>
+                            </el-dropdown-item>
                             <el-dropdown-item divided>
                                 <div @click="logout">
                                     <i class="iconfont icon-tuichu text-danger"></i>
@@ -93,6 +97,8 @@
         methods: {
             logout () {
                 this.$store.commit('Person/changeLogin')
+                if (this.isManager)
+                    this.$store.commit('Person/changeManager')
             }
         }
     }

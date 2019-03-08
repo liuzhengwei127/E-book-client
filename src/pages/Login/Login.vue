@@ -14,7 +14,7 @@
             <el-form-item>
                 <div class="checkbox mr-4">
                     <label>
-                        <input type="checkbox" value="remember-me"> 记住我
+                        <input type="checkbox" value="remember-me"> 记住我(未实现）
                     </label>
                 </div>
             </el-form-item>
@@ -115,10 +115,10 @@
 
                         if (this.SignIn.account === 'liuzhengwei' && this.SignIn.password === '990127'){
                             this.$store.commit('Person/changeManager')
-                            this.$router.push('/home')
+                            this.$router.push('/books')
                         }
                         else {
-                            this.$router.push('/books')
+                            this.$router.push('/home')
                         }
 
                     } else {
