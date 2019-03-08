@@ -111,11 +111,16 @@
             signin(formName) {
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
-                        if (this.SignUp.account === 'liuzhengwei' && this.SignUp.password === '990127')
-                            this.$store.commit('Person/changeManager')
-
                         this.$store.commit('Person/changeLogin')
-                        this.$router.push('/home')
+
+                        if (this.SignIn.account === 'liuzhengwei' && this.SignIn.password === '990127'){
+                            this.$store.commit('Person/changeManager')
+                            this.$router.push('/home')
+                        }
+                        else {
+                            this.$router.push('/books')
+                        }
+
                     } else {
                         console.log('error submit!!');
                         return false;

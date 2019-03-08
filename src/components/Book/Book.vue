@@ -16,7 +16,7 @@
                 <div class="stock mb-2">库存   {{book.stock}}</div>
                 <div class="price">{{book.price}}元</div>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-2" v-if="!isManager">
                 <div class="row mt-5 mb-2">
                     <i class="iconfont icon-jian col-md-3" @click="substract" :style="count>1? 'cursor: pointer':''" :class="count>1?'text-danger':''"></i>
                     <div class="col-md-6 text-center">{{count}}</div>
@@ -24,6 +24,11 @@
                 </div>
                 <button class="btn btn-danger btn-block mt-1" @click="addtocart">
                     加入购物车
+                </button>
+            </div>
+            <div class="col-md-2" v-else>
+                <button class="btn btn-danger btn-block mt-5">
+                    修改信息
                 </button>
             </div>
         </div>
@@ -63,6 +68,7 @@
 </template>
 
 <script>
+    import {mapState} from 'vuex'
 
     export default {
         name: "Book",
@@ -99,7 +105,12 @@
                     type: 'success'
                 });
             }
-        }
+        },
+        computed: {
+            ...mapState({
+                isManager: state => state.Person.isManager,
+            }),
+        },
     }
 </script>
 

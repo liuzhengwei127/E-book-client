@@ -2,20 +2,26 @@
   <div id="app">
       <Navbar/>
       <router-view/>
-      <ShopCart/>
+      <ShopCart v-if="!isManager"></ShopCart>
   </div>
 </template>
 
 <script>
     import Navbar from './components/Navbar/Navbar'
     import ShopCart from "./components/ShopCart/ShopCart";
+    import {mapState} from 'vuex'
 
 export default {
     name: 'app',
     components:{
         ShopCart,
         Navbar
-    }
+    },
+    computed: {
+        ...mapState({
+            isManager: state => state.Person.isManager,
+        }),
+    },
 }
 </script>
 

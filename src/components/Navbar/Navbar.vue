@@ -1,15 +1,15 @@
 <template>
     <div>
-        <nav class="navbar navbar-light border-bottom">
+        <nav class="navbar navbar-light border-bottom mt-1" :class="{ 'bg-dark':isManager}">
             <a class="navbar-brand" href="#">
-                <div class="row">
+                <div class="row" :class="{ 'text-white':isManager}">
                    <i class="iconfont icon-shuji mt-1 mr-2 ml-2"></i>
                     E-book在线书店
                 </div>
             </a>
             <ul class="nav nav-fill nav-pills" v-show="$route.meta.showNavDetail">
                 <li class="nav-item">
-                    <a class="nav-link" :class="($route.path==='/home')? 'active' : 'text-muted'" href="#/home">
+                    <a class="nav-link" :class="($route.path==='/home')? 'active' : 'text-muted'" href="#/home" v-if="!isManager">
                         <i class="iconfont icon-shouye"></i>
                         首页
                     </a>
@@ -38,6 +38,12 @@
                         统计
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" :class="($route.path==='/statistics')? 'active' : 'text-muted'" href="#/statistics" v-if="isManager">
+                        <i class="iconfont icon-guanli"></i>
+                        用户管理
+                    </a>
+                </li>
             </ul>
             <div>
                 <a href="#/login" class="card-link" v-if="!isLogin">
@@ -47,7 +53,8 @@
                 <div class="row mr-0" v-else>
                     <el-dropdown class="mr-3" style="cursor: pointer" trigger="click">
                         <span class="el-dropdown-link">
-                            <i class="iconfont icon-iconfontgerenzhongxin text-primary"></i>
+                            <i class="iconfont icon-guanliyuan text-primary" v-if="isManager"></i>
+                            <i class="iconfont icon-iconfontgerenzhongxin text-primary" v-else></i>
                             <i class="el-icon-arrow-down el-icon--right"></i>
                         </span>
                         <el-dropdown-menu slot="dropdown">
