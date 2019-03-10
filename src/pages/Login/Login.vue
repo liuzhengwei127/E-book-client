@@ -64,11 +64,27 @@
         data () {
             var checkPassword = (rule, value, callback)=> {
                 if (value === '') {
-                    callback(new Error('请再次输入密码'));
+                    callback(new Error('请再次输入密码'))
                 } else if (value !== this.SignUp.password) {
-                    callback(new Error('两次输入密码不一致!'));
+                    callback(new Error('两次输入密码不一致!'))
                 } else {
-                    callback();
+                    callback()
+                }
+            }
+
+            var Password =  (rule, value, callback) => {
+                if (value === ''){
+                    callback(new Error('密码不能为空'));
+                } else {
+                    callback()
+                }
+            }
+
+            var Account = (rule, value, callback) => {
+                if (value === ''){
+                    callback(new Error('用户名不能为空'));
+                } else {
+                    callback()
                 }
             }
             return {
@@ -99,10 +115,10 @@
                 },
                 signin_rules: {
                     account: [
-                        {required: true, message: '请输入用户名', trigger: 'change'},
+                        { validator: Account, trigger: 'change'},
                     ],
                     password: [
-                        {required: true, message: '请输入密码', trigger: 'change'}
+                        { validator: Password, trigger: 'change'}
                     ],
                 }
             }

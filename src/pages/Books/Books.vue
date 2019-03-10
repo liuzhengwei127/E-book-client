@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="mt-5">
             书籍浏览
-            <el-button type="primary" class="ml-3">
+            <el-button type="primary" class="ml-3" v-if="isManager">
                 添加书籍
             </el-button>
         </div>
