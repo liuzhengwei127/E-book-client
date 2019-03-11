@@ -59,6 +59,7 @@
 </template>
 
 <script>
+    import {mapState} from 'vuex'
     export default {
         name: "Login",
         data () {
@@ -133,13 +134,19 @@
                             this.$store.commit('Person/changeManager')
                             this.$router.push('/books')
                         }
-                        else {
-                            this.$router.push('/home')
+                        else  {
+                            for (let user in this.users) {
+                                if (this.SignIn.account === user.account && this.SignIn.password === user.password) {
+                                    this.$router.push('/home')
+                                    return true
+                                }
+                            }
+                            console.log('error password!!');
+                            return false
                         }
-
                     } else {
                         console.log('error submit!!');
-                        return false;
+                        return false
                     }
 
                 })
@@ -155,6 +162,11 @@
                     }
                 })
             }
+        },
+        computed: {
+            ...mapState({
+                users: state => state.Person.users,
+            }),
         }
     }
 </script>
