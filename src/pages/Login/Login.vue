@@ -128,24 +128,30 @@
             signin(formName) {
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
-                        this.$store.commit('Person/changeLogin')
-
                         if (this.SignIn.account === 'liuzhengwei' && this.SignIn.password === '990127'){
                             this.$store.commit('Person/changeManager')
                             this.$router.push('/books')
                         }
-                        else  {
-                            for (let user in this.users) {
+                        else {
+                            let correct = false
+                            for (let user of this.users) {
                                 if (this.SignIn.account === user.account && this.SignIn.password === user.password) {
+                                    this.$store.commit('Person/changeLogin')
                                     this.$router.push('/home')
-                                    return true
+                                    correct = true
+                                    break
                                 }
                             }
-                            console.log('error password!!');
-                            return false
+
+                            if (!correct){
+                                console.log('error password!!')
+                                this.SignIn.password = ''
+                                this.$message.error('密码错误或者用户不存在');
+                                return false
+                            }
                         }
                     } else {
-                        console.log('error submit!!');
+                        console.log('error submit!!')
                         return false
                     }
 
@@ -154,8 +160,11 @@
             signup(formName){
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
-                        this.$store.commit('Person/changeLogin')
-                        this.$router.push('/home')
+                        this.$store.commit('Person/addUser', {
+                            account: this.SignUp.account,
+                            password: this.SignUp.password
+                        })
+                        this.Login = !this.Login
                     } else {
                         console.log('error submit!!');
                         return false;

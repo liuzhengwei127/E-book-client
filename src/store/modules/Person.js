@@ -16,7 +16,7 @@ const mutations = {
     changeLogin (state) {
         state.isLogin = !state.isLogin
     },
-    addUsers (state, user) {
+    addUser (state, user) {
         state.users.push(user)
     }
 }

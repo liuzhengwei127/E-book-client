@@ -41,6 +41,7 @@
             </ul>
             <div>
                 <a href="#/login" class="card-link" v-if="!isLogin">
+                    <span></span>
                     <i class="iconfont icon-denglu"></i>
                     登录/注册
                 </a>
