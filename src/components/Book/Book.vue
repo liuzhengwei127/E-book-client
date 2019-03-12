@@ -27,7 +27,7 @@
                 </button>
             </div>
             <div class="col-md-2" v-else>
-                <button class="btn btn-danger btn-block mt-5">
+                <button class="btn btn-danger btn-block mt-5" @click="dialogVisible = !dialogVisible">
                     修改信息
                 </button>
             </div>
@@ -88,6 +88,13 @@
                             <el-col :span="24" class="mb-2"><el-input-number v-model="form.stock" controls-position="right" :min="1" size="mini"></el-input-number></el-col>
                         </el-row>
                     </el-form-item>
+                    <el-form-item label="价格">
+                        <el-row>
+                            <el-col :span="24" class="mb-2">
+                                <el-input-number v-model="form.price" controls-position="right" :min="1" size="mini"></el-input-number>元
+                            </el-col>
+                        </el-row>
+                    </el-form-item>
                 </el-form>
                 <span slot="footer" class="dialog-footer">
                     <el-row>
@@ -107,7 +114,8 @@
     export default {
         name: "Book",
         props: {
-            book: Object
+            book: Object,
+            index: Number,
         },
         data() {
             return {
@@ -119,6 +127,7 @@
                     ISBN: this.book.ISBN,
                     outline: this.book.outline,
                     stock: this.book.stock,
+                    price: this.book.price,
                 }
             }
         },
@@ -146,6 +155,18 @@
                     type: 'success'
                 });
             },
+
+            book_modify () {
+                this.$store.commit('Books/book_modify', {
+                    form: this.form,
+                    index: this.index
+                })
+                this.$message({
+                    message: '成功修改书籍信息',
+                    type: 'success'
+                });
+                this.dialogVisible = !this.dialogVisible
+            }
         },
         computed: {
             ...mapState({
