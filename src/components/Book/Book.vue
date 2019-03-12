@@ -34,37 +34,69 @@
         </div>
         <hr>
         <el-dialog
-                title="书籍详情"
+                :title="isManager? '书籍信息修改':'书籍详情'"
                 :visible.sync="dialogVisible"
-                width="50%">
-            <div class="row mb-3">
-                <div class="imgbox col-md-4 mt-5">
-                    <img :src="book.cover" class="img-thumbnail">
+                width="60%">
+            <div v-if="!isManager">
+                <div class="row mb-3">
+                    <div class="imgbox col-md-4 mt-5">
+                        <img :src="book.cover" class="img-thumbnail">
+                    </div>
+                    <div class="col-md-8 mt-4">
+                        <div class="name">
+                            书名：{{book.name}}
+                        </div>
+                        <div class="author">
+                            作者：{{book.author}}
+                        </div>
+                        <div class="isbn mt-2">
+                            ISBN：{{book.ISBN}}
+                        </div>
+                        <div class="outline mt-1">
+                            简介：{{book.outline}}
+                        </div>
+                        <div class="mt-2">
+                            库存:{{book.stock}}
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-8 mt-4">
-                    <div class="name">
-                        书名：{{book.name}}
-                    </div>
-                    <div class="author">
-                        作者：{{book.author}}
-                    </div>
-                    <div class="isbn mt-2">
-                        ISBN：{{book.ISBN}}
-                    </div>
-                    <div class="outline mt-1">
-                        简介：{{book.outline}}
-                    </div>
-                    <div class="mt-2">
-                        库存:{{book.stock}}
-                    </div>
-                </div>
+                <span slot="footer" class="dialog-footer">
+                    <el-row>
+                        <el-col :span="6" :offset="18">
+                            <el-input-number v-model="count" controls-position="right" :min="1" size="mini"></el-input-number>
+                            <el-button type="danger" class="mr-2" @click="addtocart">加入购物车</el-button>
+                        </el-col>
+                    </el-row>
+                </span>
             </div>
-            <span slot="footer" class="dialog-footer" v-if="!isManager">
-                <el-row>
-                    <el-col :span="24" class="mb-2"><el-input-number v-model="count" controls-position="right" :min="1" size="mini"></el-input-number></el-col>
-                    <el-button type="danger" class="mr-2" @click="addtocart">加入购物车</el-button>
-                </el-row>
-            </span>
+            <div v-else>
+                <el-form ref="form" :model="form" label-width="80px">
+                    <el-form-item label="书名">
+                        <el-input v-model="form.name"></el-input>
+                    </el-form-item>
+                    <el-form-item label="作者">
+                        <el-input v-model="form.author"></el-input>
+                    </el-form-item>
+                    <el-form-item label="ISBN">
+                        <el-input v-model="form.ISBN"></el-input>
+                    </el-form-item>
+                    <el-form-item label="简介">
+                        <el-input v-model="form.outline" type="textarea" :rows="5"></el-input>
+                    </el-form-item>
+                    <el-form-item label="库存">
+                        <el-row>
+                            <el-col :span="24" class="mb-2"><el-input-number v-model="form.stock" controls-position="right" :min="1" size="mini"></el-input-number></el-col>
+                        </el-row>
+                    </el-form-item>
+                </el-form>
+                <span slot="footer" class="dialog-footer">
+                    <el-row>
+                        <el-col :span="6" :offset="18">
+                            <el-button type="danger" @click="book_modify">确认修改</el-button>
+                        </el-col>
+                    </el-row>
+                </span>
+            </div>
         </el-dialog>
     </div>
 </template>
@@ -81,6 +113,13 @@
             return {
                 count: 1,
                 dialogVisible: false,
+                form: {
+                    name: this.book.name,
+                    author: this.book.author,
+                    ISBN: this.book.ISBN,
+                    outline: this.book.outline,
+                    stock: this.book.stock,
+                }
             }
         },
         methods: {
@@ -106,7 +145,7 @@
                     message: '成功加入购物车',
                     type: 'success'
                 });
-            }
+            },
         },
         computed: {
             ...mapState({
