@@ -130,6 +130,7 @@
                     if (valid) {
                         if (this.SignIn.account === 'liuzhengwei' && this.SignIn.password === '990127'){
                             this.$store.commit('Person/changeManager')
+                            this.$store.commit('Person/changeLogin')
                             this.$router.push('/books')
                         }
                         else {

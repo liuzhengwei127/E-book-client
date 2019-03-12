@@ -16,6 +16,7 @@
 
 <script>
     import Book from '../../components/Book/Book'
+    import {mapState} from 'vuex'
 
     export default {
         name: "Books",
@@ -45,6 +46,11 @@
         },
         components: {
             Book,
+        },
+        computed: {
+            ...mapState({
+                isManager: state => state.Person.isManager,
+            })
         }
     }
 </script>
