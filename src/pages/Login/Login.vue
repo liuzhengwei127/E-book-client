@@ -137,10 +137,16 @@
                             let correct = false
                             for (let user of this.users) {
                                 if (this.SignIn.account === user.account && this.SignIn.password === user.password) {
-                                    this.$store.commit('Person/changeLogin')
-                                    this.$router.push('/home')
-                                    correct = true
-                                    break
+                                    if (user.allowed){
+                                        this.$store.commit('Person/changeLogin')
+                                        this.$router.push('/home')
+                                        correct = true
+                                        break
+                                    }
+                                    else {
+                                        this.$message.error('用户已被禁用');
+                                        return false
+                                    }
                                 }
                             }
 
