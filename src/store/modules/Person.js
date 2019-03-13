@@ -5,7 +5,18 @@ const state = {
         {
             account: 'lzw',
             password: '123',
-        }
+            allowed: true,
+        },
+        {
+            account: '舒伯特',
+            password: '123',
+            allowed: true,
+        },
+        {
+            account: '本拉登',
+            password: '123',
+            allowed: false,
+        },
     ],
 }
 
@@ -18,6 +29,9 @@ const mutations = {
     },
     addUser (state, user) {
         state.users.push(user)
+    },
+    changeAllow (state, item) {
+        state.users[item.index].allowed = item.allowed
     }
 }
 
