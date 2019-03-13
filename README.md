@@ -1,4 +1,5 @@
 # e-book
+An online book shop demo(front-end) based on Vue
 
 ## Project setup
 ```
