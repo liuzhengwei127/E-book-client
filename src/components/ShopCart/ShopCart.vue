@@ -98,7 +98,8 @@
         },
         computed: {
             ...mapState({
-                books: state => state.ShopCart.books
+                books: state => state.ShopCart.books,
+                isLogin: state => state.Person.isLogin
             }),
             total () {
                 let total_money = 0;
@@ -126,9 +127,21 @@
             },
 
             submitOrder () {
-                this.$store.commit('Orders/submitOrder', {
-                    books: this.books
-                })
+                if (this.isLogin){
+                    this.$store.commit('Orders/submitOrder', {
+                        books: this.books
+                    })
+                    this.$store.commit('ShopCart/clearShopCart')
+                    this.$message({
+                        message: '成功提交订单!感谢您的购物~',
+                        type: 'success'
+                    });
+                } else {
+                    this.$message({
+                        message: '请先登录！',
+                        type: 'warning'
+                    });
+                }
             }
         }
     }

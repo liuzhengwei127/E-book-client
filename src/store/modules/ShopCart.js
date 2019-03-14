@@ -29,6 +29,10 @@ const mutations = {
     substract(state, index){
         state.books[index].count--
         state.books[index].money-= state.books[index].price
+    },
+
+    clearShopCart (state) {
+        state.books = []
     }
 }
 
