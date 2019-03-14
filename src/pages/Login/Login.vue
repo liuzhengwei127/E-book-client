@@ -169,7 +169,8 @@
                     if (valid) {
                         this.$store.commit('Person/addUser', {
                             account: this.SignUp.account,
-                            password: this.SignUp.password
+                            password: this.SignUp.password,
+                            allowed: true
                         })
                         this.Login = !this.Login
                     } else {
