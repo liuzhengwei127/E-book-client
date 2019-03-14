@@ -50,7 +50,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <button type="button" class="btn btn-danger col-md-3">
+                            <button type="button" class="btn btn-danger col-md-3" @click="submitOrder">
                                 提交订单
                             </button>
                         </div>
@@ -124,6 +124,12 @@
             add (index) {
                 this.$store.commit('ShopCart/add', index)
             },
+
+            submitOrder () {
+                this.$store.commit('Orders/submitOrder', {
+                    books: this.books
+                })
+            }
         }
     }
 </script>

@@ -40,7 +40,7 @@
             total () {
                 let total = 0;
                 this.order.books.forEach((book) => {
-                    total += book.price
+                    total += book.money
                 })
                 return total
             }
