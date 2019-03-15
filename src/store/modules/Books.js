@@ -29,6 +29,10 @@ const mutations = {
         state.books[book.index].stock = book.form.stock
         state.books[book.index].outline = book.form.outline
         state.books[book.index].price = book.form.price
+    },
+
+    addBook (state, book) {
+        state.books.push(book)
     }
 }
 

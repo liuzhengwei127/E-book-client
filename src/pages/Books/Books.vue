@@ -16,37 +16,37 @@
                 :visible.sync="dialogVisible"
                 width="60%">
             <div>
-                <el-form ref="form" :model="form" label-width="80px">
-                    <el-form-item label="书名">
+                <el-form ref="form" :model="form" :rules="rules" label-width="80px">
+                    <el-form-item label="书名" prop="name">
                         <el-input v-model="form.name"></el-input>
                     </el-form-item>
-                    <el-form-item label="作者">
+                    <el-form-item label="作者" prop="author">
                         <el-input v-model="form.author"></el-input>
                     </el-form-item>
-                    <el-form-item label="ISBN">
+                    <el-form-item label="ISBN" prop="ISBN">
                         <el-input v-model="form.ISBN"></el-input>
                     </el-form-item>
-                    <el-form-item label="简介">
+                    <el-form-item label="简介" prop="outline">
                         <el-input v-model="form.outline" type="textarea" :rows="5"></el-input>
                     </el-form-item>
-                    <el-form-item label="库存">
+                    <el-form-item label="库存" prop="stock">
                         <el-row>
                             <el-col :span="24" class="mb-2"><el-input-number v-model="form.stock" controls-position="right" :min="1" size="mini"></el-input-number></el-col>
                         </el-row>
                     </el-form-item>
-                    <el-form-item label="价格">
+                    <el-form-item label="价格" prop="price">
                         <el-row>
                             <el-col :span="24" class="mb-2">
                                 <el-input-number v-model="form.price" controls-position="right" :min="1" size="mini"></el-input-number>元
                             </el-col>
                         </el-row>
                     </el-form-item>
-                    <el-form-item label="封面">
+                    <!-- <el-form-item label="封面">
                         <el-row>
                             <el-col :span="10">
                                 <el-upload
                                         class="avatar-uploader"
-                                        action="C:\Users\75667\图片"
+                                        action="https://localhost:8080/"
                                         :show-file-list="false"
                                         :on-success="handleAvatarSuccess">
                                     <img v-if="imageUrl" :src="imageUrl" class="avatar">
@@ -54,15 +54,17 @@
                                 </el-upload>
                             </el-col>
                         </el-row>
-                    </el-form-item>
+                    </el-form-item> -->
                 </el-form>
-                <span slot="footer" class="dialog-footer">
+                <el-form>
+                    <span>
                     <el-row>
                         <el-col :span="6" :offset="18">
-                            <el-button type="primary" @click="addBook">确认添加书籍</el-button>
+                            <el-button type="primary" @click="addBook('form')">确认添加书籍</el-button>
                         </el-col>
                     </el-row>
                 </span>
+                </el-form>
             </div>
         </el-dialog>
     </div>
@@ -88,6 +90,26 @@
                     stock: undefined,
                     price: undefined,
                 },
+                rules: {
+                    name: [
+                        {required: true, message: '请输入书名', trigger: 'change'},
+                    ],
+                    author: [
+                        {required: true, message: '请输入作者', trigger: 'change'}
+                    ],
+                    ISBN: [
+                        {required:true, message: '请输入ISBN', trigger: 'change'}
+                    ],
+                    outline: [
+                        {required:true, message: '请输入简介', trigger: 'change'}
+                    ],
+                    stock: [
+                        {required:true, message: '请输入库存', trigger: 'change'}
+                    ],
+                    price: [
+                        {required:true, message: '请输入价格', trigger: 'change'}
+                    ],
+                },
                 imageUrl: '',
             }
         },
@@ -98,8 +120,17 @@
             })
         },
         methods: {
-            addBook () {
-
+            addBook (formName) {
+                this.$refs[formName].validate((valid) => {
+                    if (valid) {
+                        this.$store.commit('Books/addBook', this.form)
+                        this.dialogVisible = !this.dialogVisible
+                        this.$message.success("成功添加书籍！")
+                    } else {
+                        console.log('error submit!!')
+                        return false
+                    }
+                })
             },
 
             handleAvatarSuccess(res, file) {
