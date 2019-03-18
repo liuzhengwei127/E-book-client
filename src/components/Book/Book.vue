@@ -5,7 +5,7 @@
                 <img :src="book.cover" class="img-thumbnail" alt="Responsive image">
             </div>
             <div class="col-md-6" style="cursor: pointer"  @click="dialogVisible=!dialogVisible">
-                <div class="card-link">
+                <div class="card-link link">
                     <div class="name mt-3 mb-2">{{book.name}}</div>
                     <div class="author mb-1">作者:{{book.author}}</div>
                     <div class="outline">简介:{{book.outline}}</div>
@@ -218,6 +218,10 @@
     .price{
         font-size: 20px;
         font-family: 黑体;
+    }
+
+    .link:hover{
+        color: steelblue;
     }
 
 </style>
