@@ -49,8 +49,12 @@
             </el-form-item>
             <el-form-item>
                 <div class="center">
-                    <button class="btn btn-lg btn-primary btn-block" type="submit" @click="signup('SignUp')">确认注册</button>
-                    <button class="btn btn-lg btn-block" type="button" @click="Login=!Login">返回登录</button>
+                    <button class="btn btn-lg btn-primary btn-block" type="submit" @click="signup('SignUp')">
+                        <div>确认注册</div>
+                    </button>
+                    <button class="btn btn-lg btn-block" type="button" @click="Login=!Login">
+                        <div>返回登录</div>
+                    </button>
                 </div>
             </el-form-item>
             <el-form-item>
@@ -168,44 +172,13 @@
                                         return false
                                 }
                             }
+                        }).catch(() => {
+                            this.$message.error("登录失败，请检查网络连接")
                         })
-
-                        /*
-                        if (this.SignIn.account === 'liuzhengwei' && this.SignIn.password === '990127'){
-                            this.$store.commit('Person/changeManager')
-                            this.$store.commit('Person/changeLogin')
-                            this.$router.push('/books')
-                        }
-                        else {
-                            let correct = false
-                            for (let user of this.users) {
-                                if (this.SignIn.account === user.account && this.SignIn.password === user.password) {
-                                    if (user.allowed){
-                                        this.$store.commit('Person/changeLogin')
-                                        this.$router.push('/home')
-                                        correct = true
-                                        break
-                                    }
-                                    else {
-                                        this.$message.error('用户已被禁用');
-                                        return false
-                                    }
-                                }
-                            }
-
-                            if (!correct){
-                                console.log('error password!!')
-                                this.SignIn.password = ''
-                                this.$message.error('密码错误或者用户不存在');
-                                return false
-                            }
-                        }
-                        */
                     } else {
                         this.$message.error("请输入有效的用户名和密码");
                         return false
                     }
-
                 })
             },
             signup(formName){
@@ -220,8 +193,14 @@
                                 name: this.SignUp.name
                             }
                         }).then((response) => {
-                            if (reponse.)
-                            this.Login = !this.Login
+                            if (response.data) {
+                                this.Login = !this.Login
+                            } else {
+                                this.$message.error("注册失败");
+                                return false;
+                            }
+                        }).catch(() => {
+                            this.$message.error("注册失败，请检查网络连接")
                         })
 
                     } else {
