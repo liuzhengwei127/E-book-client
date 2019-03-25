@@ -193,16 +193,20 @@
                                 name: this.SignUp.name
                             }
                         }).then((response) => {
-                            if (response.data) {
-                                this.SignUp.account = ''
-                                this.SignUp.password = ''
-                                this.SignUp.confirm_password = ''
-                                this.SignUp.name = ''
-                                this.SignUp.email = ''
-                                this.$message.success("注册成功")
-
+                            if (response.data.account) {
+                                this.$alert('注册成功', {
+                                    confirmButtonText: '确定',
+                                    callback: () => {
+                                        this.Login = !this.Login
+                                        this.SignUp.account = ''
+                                        this.SignUp.password = ''
+                                        this.SignUp.confirm_password = ''
+                                        this.SignUp.name = ''
+                                        this.SignUp.email = ''
+                                    }
+                                });
                             } else {
-                                this.$message.error("注册失败")
+                                this.$message.error("账号已存在！")
                                 return false;
                             }
                         }).catch(() => {
