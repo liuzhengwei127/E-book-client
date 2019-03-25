@@ -32,8 +32,11 @@
             <el-form-item>
                 <h1 class="h2 font-weight-normal mb-3">注册</h1>
             </el-form-item>
+            <el-form-item label="账号" prop="account">
+                <el-input placeholder="请输入账号" v-model="SignUp.account"></el-input>
+            </el-form-item>
             <el-form-item label="用户名" prop="account">
-                <el-input placeholder="请输入用户名" v-model="SignUp.account"></el-input>
+                <el-input placeholder="请输入用户名" v-model="SignUp.name"></el-input>
             </el-form-item>
             <el-form-item label="密码" prop="password">
                 <el-input placeholder="请输入密码" v-model="SignUp.password" show-password></el-input>
@@ -92,6 +95,7 @@
                 Login: true,
                 SignUp: {
                     account: '',
+                    name:'',
                     password: '',
                     confirm_password: '',
                     email: '',
@@ -102,6 +106,9 @@
                 },
                 signup_rules: {
                     account: [
+                        {required: true, message: '请输入账号', trigger: 'change'},
+                    ],
+                    name: [
                         {required: true, message: '请输入用户名', trigger: 'change'},
                     ],
                     password: [
@@ -204,14 +211,21 @@
             signup(formName){
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
-                        this.$store.commit('Person/addUser', {
-                            account: this.SignUp.account,
-                            password: this.SignUp.password,
-                            allowed: true
+                        this.axios({
+                            method: 'post',
+                            url: '/api/user/signup',
+                            data: {
+                                account: this.SignUp.account,
+                                password: this.SignUp.password,
+                                name: this.SignUp.name
+                            }
+                        }).then((response) => {
+                            if (reponse.)
+                            this.Login = !this.Login
                         })
-                        this.Login = !this.Login
+
                     } else {
-                        console.log('error submit!!');
+                        this.$message.error("请输入有效的用户名和密码");
                         return false;
                     }
                 })
