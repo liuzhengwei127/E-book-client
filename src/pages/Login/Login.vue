@@ -128,6 +128,42 @@
             signin(formName) {
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
+                        this.axios({
+                            method: 'post',
+                            url: '/api/user/login',
+                            data: {
+                                account: this.SignIn.account,
+                                password: this.SignIn.password
+                            }
+                        }).then((response) => {
+                            if (response.data.login) {
+                                if (response.data.code) {
+                                    this.$store.commit('Person/changeManager')
+                                    this.$store.commit('Person/changeLogin')
+                                    this.$router.push('/books')
+                                } else {
+                                    this.$store.commit('Person/changeLogin')
+                                    this.$router.push('/home')
+                                }
+                            } else {
+                                switch (response.data.code) {
+                                    case 0:
+                                        this.SignIn.password = ''
+                                        this.$message.error('用户不存在');
+                                        return false
+                                    case 1:
+                                        this.SignIn.password = ''
+                                        this.$message.error('密码错误');
+                                        return false
+                                    case 2:
+                                        this.SignIn.password = ''
+                                        this.$message.error('用户被禁用');
+                                        return false
+                                }
+                            }
+                        })
+
+                        /*
                         if (this.SignIn.account === 'liuzhengwei' && this.SignIn.password === '990127'){
                             this.$store.commit('Person/changeManager')
                             this.$store.commit('Person/changeLogin')
@@ -157,8 +193,9 @@
                                 return false
                             }
                         }
+                        */
                     } else {
-                        console.log('error submit!!')
+                        this.$message.error("请输入有效的用户名和密码");
                         return false
                     }
 
