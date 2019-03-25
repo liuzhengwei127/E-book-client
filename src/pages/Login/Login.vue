@@ -194,9 +194,15 @@
                             }
                         }).then((response) => {
                             if (response.data) {
-                                this.Login = !this.Login
+                                this.SignUp.account = ''
+                                this.SignUp.password = ''
+                                this.SignUp.confirm_password = ''
+                                this.SignUp.name = ''
+                                this.SignUp.email = ''
+                                this.$message.success("注册成功")
+
                             } else {
-                                this.$message.error("注册失败");
+                                this.$message.error("注册失败")
                                 return false;
                             }
                         }).catch(() => {
@@ -204,7 +210,7 @@
                         })
 
                     } else {
-                        this.$message.error("请输入有效的用户名和密码");
+                        this.$message.error("请输入有效的用户名和密码")
                         return false;
                     }
                 })
