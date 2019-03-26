@@ -55,8 +55,10 @@
                         account: account,
                     }
                 })
-                this.$store.commit('Person/changeAllow', {index: index,allowed : this.tableData[index].allowed})
             }
+        },
+        mounted() {
+            this.$store.dispatch('Person/getUerState')
         }
     }
 </script>
