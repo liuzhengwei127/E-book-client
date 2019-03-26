@@ -11,7 +11,7 @@
                 </el-table-column>
                 <el-table-column
                         align="right"
-                        prop="address"
+                        prop="allow"
                         label="用户状态">
                     <template slot-scope="scope">
                         <div class="user_state">
@@ -47,7 +47,14 @@
             })
         },
         methods: {
-            changeAllow (index) {
+            changeAllow (account) {
+                this.axios({
+                    method: 'post',
+                    url: '/api/user/change',
+                    data: {
+                        account: account,
+                    }
+                })
                 this.$store.commit('Person/changeAllow', {index: index,allowed : this.tableData[index].allowed})
             }
         }

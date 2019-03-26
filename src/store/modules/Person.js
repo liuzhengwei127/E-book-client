@@ -1,6 +1,7 @@
 const state = {
     isManager: false,
     isLogin: false,
+    users: [],
 }
 
 const mutations = {
