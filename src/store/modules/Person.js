@@ -20,7 +20,7 @@ const mutations = {
 }
 
 const actions = {
-    getUerState (commit) {
+    getUerState ({commit}) {
         reqGetUserState().then((data) => {
             commit('updateUserState', data)
         })

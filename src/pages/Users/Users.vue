@@ -22,7 +22,7 @@
                                     inactive-color="#ff4949"
                                     active-text="通行"
                                     inactive-text="禁用"
-                                    @change="changeAllow(scope.$index)">
+                                    @change="changeAllow(scope.row.account)">
                             </el-switch>
                         </div>
                     </template>
@@ -34,6 +34,7 @@
 
 <script>
     import {mapState} from 'vuex'
+    import {reqChangeUser} from "../../api";
 
     export default {
         name: "Users",
@@ -43,16 +44,16 @@
         },
         computed: {
             ...mapState({
-                tableData: state => state.Person.users
+                tableData: state => state.Person.userStates
             })
         },
         methods: {
             changeAllow (account) {
-                this.axios({
-                    method: 'post',
-                    url: '/api/user/change',
-                    data: {
-                        account: account,
+                reqChangeUser(account).then((data)=>{
+                    if (data.account) {
+                        this.$store.dispatch('Person/getUerState')
+                    } else {
+                        this.$message.error("用户权限更改失败")
                     }
                 })
             }
