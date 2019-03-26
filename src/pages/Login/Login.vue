@@ -67,6 +67,8 @@
 
 <script>
     import {mapState} from 'vuex'
+    import {reqLogin, reqSignup} from '../../api'
+
     export default {
         name: "Login",
         data () {
@@ -136,19 +138,16 @@
             }
         },
         methods: {
+            // 用户登录
             signin(formName) {
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
-                        this.axios({
-                            method: 'post',
-                            url: '/api/user/login',
-                            data: {
-                                account: this.SignIn.account,
-                                password: this.SignIn.password
-                            }
-                        }).then((response) => {
-                            if (response.data.login) {
-                                if (response.data.code) {
+                        reqLogin({
+                            account: this.SignIn.account,
+                            password: this.SignIn.password
+                        }).then((data) => {
+                            if (data.login) {
+                                if (data.code) {
                                     this.$store.commit('Person/changeManager')
                                     this.$store.commit('Person/changeLogin')
                                     this.$router.push('/books')
@@ -157,7 +156,7 @@
                                     this.$router.push('/home')
                                 }
                             } else {
-                                switch (response.data.code) {
+                                switch (data.code) {
                                     case 0:
                                         this.SignIn.password = ''
                                         this.$message.error('用户不存在');
@@ -172,7 +171,7 @@
                                         return false
                                 }
                             }
-                        }).catch(() => {
+                        }).catch((error) => {
                             this.$message.error("登录失败，请检查网络连接")
                         })
                     } else {
@@ -181,19 +180,16 @@
                     }
                 })
             },
+
             signup(formName){
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
-                        this.axios({
-                            method: 'post',
-                            url: '/api/user/signup',
-                            data: {
-                                account: this.SignUp.account,
-                                password: this.SignUp.password,
-                                name: this.SignUp.name
-                            }
-                        }).then((response) => {
-                            if (response.data.account) {
+                        reqSignup({
+                            account: this.SignUp.account,
+                            password: this.SignUp.password,
+                            name: this.SignUp.name
+                        }).then((data) => {
+                            if (data.account) {
                                 this.$alert('注册成功', {
                                     confirmButtonText: '确定',
                                     callback: () => {
