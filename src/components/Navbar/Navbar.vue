@@ -102,6 +102,7 @@
                     this.$store.commit('Person/changeManager')
 
                 this.$router.push('/home')
+                this.$message.success("用户注销成功！")
             }
         }
     }

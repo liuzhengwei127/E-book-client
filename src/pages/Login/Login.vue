@@ -171,7 +171,7 @@
                                         return false
                                 }
                             }
-                        }).catch((error) => {
+                        }).catch(() => {
                             this.$message.error("登录失败，请检查网络连接")
                         })
                     } else {
