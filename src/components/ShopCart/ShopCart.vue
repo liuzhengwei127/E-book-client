@@ -85,6 +85,7 @@
 
 <script>
     import {mapState} from 'vuex'
+    import {reqAddOrder} from "../../api";
 
     export default {
         name: "ShopCart",
@@ -128,14 +129,22 @@
 
             submitOrder () {
                 if (this.isLogin){
-                    this.$store.commit('Orders/submitOrder', {
-                        books: this.books
+                    const order = []
+                    for (let book of this.books) {
+                        const item = {
+                            account: this.$store.state.Person.account,
+                            isbn: book.isbn,
+                            count: book.count
+                        }
+                        order.push(item)
+                    }
+
+                    console.log(order)
+                    reqAddOrder(order).then(() => {
+                        this.$store.commit('ShopCart/clearShopCart')
+                        this.$message.success("成功提交订单!感谢您的购物~")
                     })
-                    this.$store.commit('ShopCart/clearShopCart')
-                    this.$message({
-                        message: '成功提交订单!感谢您的购物~',
-                        type: 'success'
-                    });
+
                 } else {
                     this.$message({
                         message: '请先登录！',

@@ -5,10 +5,6 @@ const state = {
 }
 
 const mutations = {
-    submitOrder(state, order) {
-        state.orders.push(order)
-    },
-
     updateOrder(state, orders) {
         state.orders = orders
     }

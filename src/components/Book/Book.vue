@@ -147,6 +147,7 @@
                     cover: this.book.cover,
                     name: this.book.name,
                     author: this.book.author,
+                    isbn: this.book.isbn,
                     count: this.count,
                     price: this.book.price,
                     money: this.count*this.book.price
