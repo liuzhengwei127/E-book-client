@@ -15,7 +15,11 @@
     export default {
         name: "Orders",
         mounted() {
-            this.$store.dispatch('Orders/getOrder', this.$store.state.Person.account)
+            if (this.$store.state.Person.isManager) {
+                this.$store.dispatch('Orders/getAllOrder')
+            } else {
+                this.$store.dispatch('Orders/getOrder', this.$store.state.Person.account)
+            }
         },
         components: {
             Order

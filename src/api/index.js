@@ -42,3 +42,6 @@ export const reqGetOrder = (account) => ajax(BASE_URL+'/order/get',{account}, 'P
 
 // 9、添加订单
 export const reqAddOrder = (orders) => ajax(BASE_URL+'/order/add', {orders}, 'POST')
+
+// 10、获得所有订单
+export const reqGetAllOrder = () => ajax(BASE_URL+'/order/getall')

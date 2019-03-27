@@ -139,7 +139,6 @@
                         order.push(item)
                     }
 
-                    console.log(order)
                     reqAddOrder(order).then(() => {
                         this.$store.commit('ShopCart/clearShopCart')
                         this.$message.success("成功提交订单!感谢您的购物~")

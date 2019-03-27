@@ -146,11 +146,11 @@
                             account: this.SignIn.account,
                             password: this.SignIn.password
                         }).then((data) => {
-                            console.log(data)
                             if (data.login) {
                                 if (data.code) {
                                     this.$store.commit('Person/changeManager')
                                     this.$store.commit('Person/changeLogin')
+                                    this.$store.commit('Person/setAccount', data.account)
                                     this.$router.push('/books')
                                 } else {
                                     this.$store.commit('Person/changeLogin')
