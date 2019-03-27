@@ -13,3 +13,6 @@ export const reqChangeUser = (account) => ajax(BASE_URL+'/user/change', {account
 
 // 4、获取所有用户状态
 export const reqGetUserState = () => ajax(BASE_URL+'/user/states')
+
+// 5、获取所有书籍
+export const reqGetAllBook = () => ajax(BASE_URL+'/book/get')

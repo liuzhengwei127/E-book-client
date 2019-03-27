@@ -76,6 +76,11 @@
 
     export default {
         name: "Books",
+
+        mounted() {
+            this.$store.dispatch('Books/getAllBook')
+        },
+
         components: {
             Book,
         },
@@ -123,11 +128,11 @@
             addBook (formName) {
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
-                        this.$store.commit('Books/addBook', this.form)
-                        this.dialogVisible = !this.dialogVisible
-                        this.$message.success("成功添加书籍！")
+                        this.$store.dispatch('Books/addBook', this.form).then( () => {
+                            this.dialogVisible = !this.dialogVisible
+                            this.$message.success("成功添加书籍！")
+                        })
                     } else {
-                        console.log('error submit!!')
                         return false
                     }
                 })

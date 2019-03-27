@@ -6,6 +6,11 @@
                     style="width: 100%">
                 <el-table-column
                         prop="account"
+                        label="账户"
+                        width="180">
+                </el-table-column>
+                <el-table-column
+                        prop="name"
                         label="用户名"
                         width="180">
                 </el-table-column>
@@ -51,7 +56,9 @@
             changeAllow (account) {
                 reqChangeUser(account).then((data)=>{
                     if (data.account) {
-                        this.$store.dispatch('Person/getUerState')
+                        this.$store.dispatch('Person/getUerState').then( () => {
+                            this.$message.success("用户权限更改成功")
+                        })
                     } else {
                         this.$message.error("用户权限更改失败")
                     }
