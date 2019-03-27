@@ -16,3 +16,13 @@ export const reqGetUserState = () => ajax(BASE_URL+'/user/states')
 
 // 5、获取所有书籍
 export const reqGetAllBook = () => ajax(BASE_URL+'/book/get')
+
+// 6、添加书籍
+export const reqAddBook = (book) => ajax(BASE_URL+'/book/add', {
+    name: book.name,
+    author: book.author,
+    isbn: book.ISBN,
+    outline: book.outline,
+    price: book.price,
+    stock: book.stock
+}, 'POST')

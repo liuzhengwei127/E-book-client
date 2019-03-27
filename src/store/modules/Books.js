@@ -1,4 +1,4 @@
-import {reqGetAllBook} from '../../api'
+import {reqGetAllBook, reqAddBook} from '../../api'
 
 const state = {
     books: [],
@@ -26,8 +26,15 @@ const actions = {
         })
     },
 
-    addBook (book) {
-        commit('addBook', book)
+    addBook (context,book) {
+        return new Promise((resolve, reject) => {
+            //console.log(book)
+            reqAddBook(book).then(() => {
+                resolve(true)
+            }).catch((error) => {
+                reject(error)
+            })
+        })
     },
 }
 

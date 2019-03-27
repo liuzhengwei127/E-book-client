@@ -131,6 +131,7 @@
                         this.$store.dispatch('Books/addBook', this.form).then( () => {
                             this.dialogVisible = !this.dialogVisible
                             this.$message.success("成功添加书籍！")
+                            this.$store.dispatch('Books/getAllBook')
                         })
                     } else {
                         return false
