@@ -1,48 +1,45 @@
+import {reqGetOrder} from "../../api";
+
 const state = {
-    orders: [
-        {
-            books: [
-                {
-                    cover: './images/test1.jpg',
-                    name: '看见',
-                    author: '柴静',
-                    price: 20,
-                    count: 1,
-                    money: 20,
-                }
-            ]
-        },
-        {
-            books: [
-                {
-                    cover: './images/test1.jpg',
-                    name: '看见',
-                    author: '柴静',
-                    price: 20,
-                    count: 1,
-                    money: 20,
-                },
-                {
-                    cover: './images/test2.jpg',
-                    name: '人类简史：从动物到上帝',
-                    author: '尤瓦尔·赫拉利',
-                    price: 40,
-                    count: 1,
-                    money: 40,
-                }
-            ]
-        }
-    ]
+    orders: []
 }
 
 const mutations = {
     submitOrder(state, order) {
         state.orders.push(order)
+    },
+
+    updateOrder(state, orders) {
+        state.orders = orders
+    }
+}
+
+const actions = {
+    getOrder({commit}, account) {
+        reqGetOrder(account).then((data) => {
+            const orders = []
+            for (let items of data) {
+                const order = []
+                for (let item of items) {
+                    const book = {
+                         author: item.author,
+                         name: item.bookname,
+                         count: item.count,
+                         price: item.price,
+                         total: item.price*item.count
+                     }
+                     order.push(book)
+                }
+                orders.push(order)
+            }
+            commit('updateOrder', orders)
+        })
     }
 }
 
 export default {
     namespaced: true,
     state,
-    mutations
+    mutations,
+    actions
 }

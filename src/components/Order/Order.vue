@@ -1,30 +1,32 @@
 <template>
     <div class="container mb-5 mt-5">
         <i class="iconfont icon-dingdan"></i>
-        <div v-for="(book) in order.books" :key="book.name" class="row mt-3 mb-3">
-            <div class="imgbox col-md-2">
-                <img :src="book.cover" class="img-thumbnail" alt="Responsive image">
-            </div>
-            <div class="col-md-6">
-                <div class="name mb-3 mt-3">
-                    {{book.name}}
+        <div v-for="(book) in order" :key="book.name" class="mt-3 mb-5">
+            <div class="row">
+                <div class="imgbox col-md-2">
+                    <img :src="book.cover" class="img-thumbnail" alt="Responsive image">
                 </div>
-                <div class="author">
-                    {{book.author}}
+                <div class="col-md-6">
+                    <div class="name mb-3 mt-3">
+                        {{book.name}}
+                    </div>
+                    <div class="author">
+                        {{book.author}}
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    ×{{book.count}}
+                </div>
+                <div class="col-md-2">
+                    {{book.price}}元
                 </div>
             </div>
-            <div class="col-md-1">
-                ×{{book.count}}
-            </div>
-            <div class="col-md-2">
-                {{book.price}}元
-            </div>
-        </div>
-        <hr>
-        <div class="total text-right">
-            总计
-            <div class="money text-danger">
-                ￥{{total}}
+            <hr>
+            <div class="total text-right">
+                总计
+                <div class="money text-danger">
+                    ￥{{book.total}}
+                </div>
             </div>
         </div>
     </div>
@@ -34,17 +36,8 @@
     export default {
         name: "Order",
         props: {
-            order: Object
+            order: Array
         },
-        computed: {
-            total () {
-                let total = 0;
-                this.order.books.forEach((book) => {
-                    total += book.money
-                })
-                return total
-            }
-        }
     }
 </script>
 

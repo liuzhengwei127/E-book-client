@@ -3,6 +3,7 @@ import {reqGetUserState} from '../../api'
 const state = {
     isManager: false,
     isLogin: false,
+    account: '',
     userStates: [],
 }
 
@@ -16,6 +17,10 @@ const mutations = {
 
     updateUserState (state, userStates) {
         state.userStates = userStates
+    },
+
+    setAccount (state, account) {
+        state.account = account
     }
 }
 

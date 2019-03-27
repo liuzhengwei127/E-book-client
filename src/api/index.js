@@ -36,3 +36,6 @@ export const reqModifyBook = (book) => ajax(BASE_URL+'/book/modify', {
     price: book.price,
     stock: book.stock
 }, 'POST')
+
+// 8、获得相应用户订单
+export const reqGetOrder = (account) => ajax(BASE_URL+'/order/get',{account}, 'POST')

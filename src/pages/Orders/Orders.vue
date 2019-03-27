@@ -14,10 +14,8 @@
 
     export default {
         name: "Orders",
-        data () {
-            return {
-
-            }
+        mounted() {
+            this.$store.dispatch('Orders/getOrder', this.$store.state.Person.account)
         },
         components: {
             Order
