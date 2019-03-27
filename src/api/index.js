@@ -21,7 +21,17 @@ export const reqGetAllBook = () => ajax(BASE_URL+'/book/get')
 export const reqAddBook = (book) => ajax(BASE_URL+'/book/add', {
     name: book.name,
     author: book.author,
-    isbn: book.ISBN,
+    isbn: book.isbn,
+    outline: book.outline,
+    price: book.price,
+    stock: book.stock
+}, 'POST')
+
+// 7、修改书籍
+export const reqModifyBook = (book) => ajax(BASE_URL+'/book/modify', {
+    name: book.name,
+    author: book.author,
+    isbn: book.isbn,
     outline: book.outline,
     price: book.price,
     stock: book.stock

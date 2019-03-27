@@ -73,6 +73,7 @@
 <script>
     import Book from '../../components/Book/Book'
     import {mapState} from 'vuex'
+    import {reqAddBook} from '../../api'
 
     export default {
         name: "Books",
@@ -128,7 +129,7 @@
             addBook (formName) {
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
-                        this.$store.dispatch('Books/addBook', this.form).then( () => {
+                        reqAddBook(this.form).then( () => {
                             this.dialogVisible = !this.dialogVisible
                             this.$message.success("成功添加书籍！")
                             this.$store.dispatch('Books/getAllBook')

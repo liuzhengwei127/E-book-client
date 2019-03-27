@@ -12,7 +12,7 @@
                 </div>
             </div>
             <div class="col-md-2">
-                <div class="isbn mt-3 mb-5">ISBN:{{book.ISBN}}</div>
+                <div class="isbn mt-3 mb-5">ISBN:{{book.isbn}}</div>
                 <div class="stock mb-2">库存   {{book.stock}}</div>
                 <div class="price">{{book.price}}元</div>
             </div>
@@ -50,7 +50,7 @@
                             作者：{{book.author}}
                         </div>
                         <div class="isbn mt-2">
-                            ISBN：{{book.ISBN}}
+                            ISBN：{{book.isbn}}
                         </div>
                         <div class="outline mt-1">
                             简介：{{book.outline}}
@@ -78,7 +78,7 @@
                         <el-input v-model="form.author"></el-input>
                     </el-form-item>
                     <el-form-item label="ISBN">
-                        <el-input v-model="form.ISBN"></el-input>
+                        <el-input v-model="form.isbn"></el-input>
                     </el-form-item>
                     <el-form-item label="简介">
                         <el-input v-model="form.outline" type="textarea" :rows="5"></el-input>
@@ -110,6 +110,7 @@
 
 <script>
     import {mapState} from 'vuex'
+    import {reqModifyBook} from "../../api";
 
     export default {
         name: "Book",
@@ -124,7 +125,7 @@
                 form: {
                     name: this.book.name,
                     author: this.book.author,
-                    ISBN: this.book.ISBN,
+                    isbn: this.book.isbn,
                     outline: this.book.outline,
                     stock: this.book.stock,
                     price: this.book.price,
@@ -157,15 +158,11 @@
             },
 
             book_modify () {
-                this.$store.commit('Books/book_modify', {
-                    form: this.form,
-                    index: this.index
+                reqModifyBook(this.form).then(() => {
+                    this.$message.success("成功修改书籍信息")
+                    this.dialogVisible = !this.dialogVisible
+                    this.$store.dispatch('Books/getAllBook')
                 })
-                this.$message({
-                    message: '成功修改书籍信息',
-                    type: 'success'
-                });
-                this.dialogVisible = !this.dialogVisible
             }
         },
         computed: {
