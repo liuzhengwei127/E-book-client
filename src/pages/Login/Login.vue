@@ -20,7 +20,7 @@
             </el-form-item>
             <el-form-item>
                 <div class="center">
-                    <button class="btn btn-lg btn-primary btn-block" type="submit" @click="signin('SignIn')">登录</button>
+                    <button class="btn btn-lg btn-primary btn-block" type="submit" @click.prevent="signin('SignIn')">登录</button>
                     <button class="btn btn-lg btn-block" type="button" @click="Login=!Login">注册</button>
                 </div>
             </el-form-item>
@@ -49,7 +49,7 @@
             </el-form-item>
             <el-form-item>
                 <div class="center">
-                    <button class="btn btn-lg btn-primary btn-block" type="submit" @click="signup('SignUp')">
+                    <button class="btn btn-lg btn-primary btn-block" type="submit" @click.prevent="signup('SignUp')">
                         <div>确认注册</div>
                     </button>
                     <button class="btn btn-lg btn-block" type="button" @click="Login=!Login">

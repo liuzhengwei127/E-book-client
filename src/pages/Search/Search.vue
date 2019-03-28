@@ -11,11 +11,18 @@
             <button class="btn btn-primary btn-block ml-2 col-md-1" @click="searchBook">搜索</button>
         </div>
         <div>
-            <ul  class="mt-5">
+            <ul class="mt-5" v-show="books.length > 0">
                 <li v-for="(book, index) in books" :key="index" class="list-unstyled mb-5">
                     <Book :book="book" :index="index"></Book>
                 </li>
             </ul>
+            <div v-show="books.length === 0" class="container mt-5">
+                <div class="row">
+                    <div style="font-family: 等线">
+                        暂时没有您要搜索的书籍~
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -37,7 +44,7 @@
         computed: {
             ...mapState({
                 books: state => state.Books.filteredBooks
-            })
+            }),
         },
         methods: {
             searchBook() {
