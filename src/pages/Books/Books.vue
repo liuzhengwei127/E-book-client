@@ -41,20 +41,20 @@
                             </el-col>
                         </el-row>
                     </el-form-item>
-                    <!-- <el-form-item label="封面">
+                    <el-form-item label="封面">
                         <el-row>
                             <el-col :span="10">
                                 <el-upload
-                                        class="avatar-uploader"
-                                        action="https://localhost:8080/"
-                                        :show-file-list="false"
-                                        :on-success="handleAvatarSuccess">
-                                    <img v-if="imageUrl" :src="imageUrl" class="avatar">
-                                    <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                                        :before-remove="beforeRemove"
+                                        :file-list="fileList"
+                                        class="upload-demo"
+                                        action="/api/upload">
+                                    <el-button size="small" type="primary">点击上传</el-button>
+                                    <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
                                 </el-upload>
                             </el-col>
                         </el-row>
-                    </el-form-item> -->
+                    </el-form-item>
                 </el-form>
                 <el-form>
                     <span>
@@ -73,7 +73,7 @@
 <script>
     import Book from '../../components/Book/Book'
     import {mapState} from 'vuex'
-    import {reqAddBook} from '../../api'
+    import {reqAddBook, reqDeleteImg} from '../../api'
 
     export default {
         name: "Books",
@@ -88,6 +88,7 @@
         data () {
             return {
                 dialogVisible: false,
+                fileList: [],
                 form: {
                     name: '',
                     author: '',
@@ -140,9 +141,16 @@
                 })
             },
 
-            handleAvatarSuccess(res, file) {
-                this.imageUrl = URL.createObjectURL(file.raw);
-            },
+            beforeRemove (file) {
+                reqDeleteImg(file.name).then((data) => {
+                    if (data === "删除失败") {
+                        return false
+                    }
+                }).catch( (error) => {
+                    console.log(error)
+                    return false
+                })
+            }
         }
     }
 </script>
