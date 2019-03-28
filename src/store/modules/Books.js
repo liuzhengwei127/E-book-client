@@ -1,12 +1,17 @@
-import {reqGetAllBook} from '../../api'
+import {reqGetAllBook, reqSearchBook} from '../../api'
 
 const state = {
     books: [],
+    filteredBooks: []
 }
 
 const mutations = {
     updateBook(state, books) {
         state.books = books
+    },
+
+    updateFilteredBook(state, books) {
+        state.filteredBooks = books
     }
 }
 
@@ -16,6 +21,12 @@ const actions = {
             commit('updateBook', data)
         })
     },
+
+    searchBook({commit}, filter) {
+        reqSearchBook(filter).then((data) => {
+            commit('updateFilteredBook', data)
+        })
+    }
 }
 
 export default {
