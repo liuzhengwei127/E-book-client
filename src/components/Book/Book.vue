@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="imgbox col-md-2" style="cursor: pointer" @click="dialogVisible=!dialogVisible">
-                <img :src="book.url" class="img-thumbnail" alt="Responsive image">
+                <img :src="url" class="img-thumbnail" alt="Responsive image">
             </div>
             <div class="col-md-6" style="cursor: pointer"  @click="dialogVisible=!dialogVisible">
                 <div class="card-link link">
@@ -95,6 +95,21 @@
                             </el-col>
                         </el-row>
                     </el-form-item>
+                    <el-form-item label="封面">
+                        <el-row>
+                            <el-col :span="10">
+                                <el-upload
+                                        :on-success="onSuccess"
+                                        :before-remove="beforeRemove"
+                                        :file-list="fileList"
+                                        class="upload-demo"
+                                        action="/api/upload">
+                                    <el-button size="small" type="primary">点击上传</el-button>
+                                    <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+                                </el-upload>
+                            </el-col>
+                        </el-row>
+                    </el-form-item>
                 </el-form>
                 <span slot="footer" class="dialog-footer">
                     <el-row>
@@ -110,7 +125,7 @@
 
 <script>
     import {mapState} from 'vuex'
-    import {reqModifyBook} from "../../api";
+    import {reqModifyBook, reqDeleteImg} from "../../api";
 
     export default {
         name: "Book",
@@ -122,6 +137,7 @@
             return {
                 count: 1,
                 dialogVisible: false,
+                fileList: [],
                 form: {
                     name: this.book.name,
                     author: this.book.author,
@@ -161,15 +177,40 @@
             book_modify () {
                 reqModifyBook(this.form).then(() => {
                     this.$message.success("成功修改书籍信息")
+                    this.fileList = []
                     this.dialogVisible = !this.dialogVisible
                     this.$store.dispatch('Books/getAllBook')
                 })
+            },
+
+            beforeRemove (file) {
+                reqDeleteImg(file.name).then((data) => {
+                    if (data === "删除失败") {
+                        return false
+                    }
+                }).catch( () => {
+                    return false
+                })
+            },
+
+            onSuccess (response) {
+                this.form.url = response
             }
         },
         computed: {
             ...mapState({
                 isManager: state => state.Person.isManager,
             }),
+            url: function () {
+                if (Object.keys(this.book).length != 0 && this.book.url != null) {
+                    let index = this.book.url.lastIndexOf("\\")
+                    let url = this.book.url.slice(index+1, this.book.url.length)
+                    url = "./images/"+url
+                    return url
+                }
+
+                return "./"
+            }
         },
     }
 </script>

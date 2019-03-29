@@ -23,8 +23,8 @@
                     <el-form-item label="作者" prop="author">
                         <el-input v-model="form.author"></el-input>
                     </el-form-item>
-                    <el-form-item label="ISBN" prop="ISBN">
-                        <el-input v-model="form.ISBN"></el-input>
+                    <el-form-item label="ISBN" prop="isbn">
+                        <el-input v-model="form.isbn"></el-input>
                     </el-form-item>
                     <el-form-item label="简介" prop="outline">
                         <el-input v-model="form.outline" type="textarea" :rows="5"></el-input>
@@ -106,7 +106,7 @@
                     author: [
                         {required: true, message: '请输入作者', trigger: 'change'}
                     ],
-                    ISBN: [
+                    isbn: [
                         {required:true, message: '请输入ISBN', trigger: 'change'}
                     ],
                     outline: [
@@ -135,6 +135,7 @@
                         reqAddBook(this.form).then( () => {
                             this.dialogVisible = !this.dialogVisible
                             this.$message.success("成功添加书籍！")
+                            this.fileList = []
                             this.$store.dispatch('Books/getAllBook')
                         })
                     } else {
@@ -148,8 +149,7 @@
                     if (data === "删除失败") {
                         return false
                     }
-                }).catch( (error) => {
-                    console.log(error)
+                }).catch( () => {
                     return false
                 })
             },
