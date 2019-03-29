@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="imgbox col-md-2" style="cursor: pointer" @click="dialogVisible=!dialogVisible">
-                <img :src="book.cover" class="img-thumbnail" alt="Responsive image">
+                <img :src="book.url" class="img-thumbnail" alt="Responsive image">
             </div>
             <div class="col-md-6" style="cursor: pointer"  @click="dialogVisible=!dialogVisible">
                 <div class="card-link link">
@@ -40,7 +40,7 @@
             <div v-if="!isManager">
                 <div class="row mb-3">
                     <div class="imgbox col-md-4 mt-5">
-                        <img :src="book.cover" class="img-thumbnail">
+                        <img :src="book.url" class="img-thumbnail">
                     </div>
                     <div class="col-md-8 mt-4">
                         <div class="name">
@@ -144,7 +144,7 @@
 
             addtocart () {
                 this.$store.commit('ShopCart/addtocart', {
-                    cover: this.book.cover,
+                    url: this.book.url,
                     name: this.book.name,
                     author: this.book.author,
                     isbn: this.book.isbn,

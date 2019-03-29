@@ -45,6 +45,7 @@
                         <el-row>
                             <el-col :span="10">
                                 <el-upload
+                                        :on-success="onSuccess"
                                         :before-remove="beforeRemove"
                                         :file-list="fileList"
                                         class="upload-demo"
@@ -92,10 +93,11 @@
                 form: {
                     name: '',
                     author: '',
-                    ISBN: '',
+                    isbn: '',
                     outline: '',
                     stock: undefined,
                     price: undefined,
+                    url: '',
                 },
                 rules: {
                     name: [
@@ -150,6 +152,10 @@
                     console.log(error)
                     return false
                 })
+            },
+
+            onSuccess (response) {
+                this.form.url = response
             }
         }
     }

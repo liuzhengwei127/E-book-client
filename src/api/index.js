@@ -24,7 +24,8 @@ export const reqAddBook = (book) => ajax(BASE_URL+'/book/add', {
     isbn: book.isbn,
     outline: book.outline,
     price: book.price,
-    stock: book.stock
+    stock: book.stock,
+    url: book.url,
 }, 'POST')
 
 // 7、修改书籍
@@ -34,7 +35,8 @@ export const reqModifyBook = (book) => ajax(BASE_URL+'/book/modify', {
     isbn: book.isbn,
     outline: book.outline,
     price: book.price,
-    stock: book.stock
+    stock: book.stock,
+    url: book.url
 }, 'POST')
 
 // 8、获得相应用户订单
