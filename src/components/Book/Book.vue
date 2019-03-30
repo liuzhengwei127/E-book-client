@@ -18,9 +18,15 @@
             </div>
             <div class="col-md-2" v-if="!isManager">
                 <div class="row mt-5 mb-2">
-                    <i class="iconfont icon-jian col-md-3" @click="substract" :style="count>1? 'cursor: pointer':''" :class="count>1?'text-danger':''"></i>
+                    <i class="iconfont icon-jian col-md-3"
+                       @click="substract"
+                       :style="count>1? 'cursor: pointer':''"
+                       :class="count>1?'text-danger':''"></i>
                     <div class="col-md-6 text-center">{{count}}</div>
-                    <i class="iconfont icon-jia col-md-3 text-danger" @click="add" style="cursor: pointer"></i>
+                    <i class="iconfont icon-jia col-md-3"
+                       @click="add"
+                       :style="count<book.stock? 'cursor: pointer':''"
+                       :class="count<book.stock?'text-danger':''"></i>
                 </div>
                 <button class="btn btn-danger btn-block mt-1" @click="addtocart">
                     加入购物车
@@ -40,7 +46,7 @@
             <div v-if="!isManager">
                 <div class="row mb-3">
                     <div class="imgbox col-md-4 mt-5">
-                        <img :src="book.url" class="img-thumbnail">
+                        <img :src="url" class="img-thumbnail">
                     </div>
                     <div class="col-md-8 mt-4">
                         <div class="name">
@@ -155,23 +161,26 @@
             },
 
             add () {
-                this.count++
+                if (this.count < this.book.stock) {
+                    this.count++
+                }
             },
 
             addtocart () {
-                this.$store.commit('ShopCart/addtocart', {
+                this.$store.dispatch('ShopCart/addtocart', {
                     url: this.book.url,
                     name: this.book.name,
                     author: this.book.author,
                     isbn: this.book.isbn,
                     count: this.count,
                     price: this.book.price,
-                    money: this.count*this.book.price
+                    money: this.count*this.book.price,
+                    stock: this.book.stock
+                }).then(() => {
+                    this.$message.success("成功加入购物车")
+                }).catch(() => {
+                    this.$message.error("超过库存，无法加入购物车")
                 })
-                this.$message({
-                    message: '成功加入购物车',
-                    type: 'success'
-                });
             },
 
             book_modify () {

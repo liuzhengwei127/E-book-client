@@ -8,7 +8,7 @@
                             <li v-for="(book, index) in books" :key="index" class="list-unstyled mb-2 mt-1 ">
                                 <div class="row mt-3">
                                     <div class="imgbox col-md-3">
-                                        <img :src="book.cover" class="img-thumbnail">
+                                        <img :src="urls[index]" class="img-thumbnail">
                                     </div>
                                     <div class="col-md-6">
                                         <div class="col-md-12">
@@ -25,7 +25,10 @@
                                             <i class="iconfont icon-jian" @click="substract(book.count, index)" :style="book.count>1? 'cursor: pointer':''"
                                                :class="book.count>1? 'text-danger':''"></i>
                                             ×{{ book.count }}
-                                            <i class="iconfont icon-jia text-danger" @click="add(index)" style="cursor: pointer"></i>
+                                            <i class="iconfont icon-jia"
+                                               @click="add(book.count,book.stock, index)"
+                                               :style="book.count<book.stock? 'cursor: pointer':''"
+                                               :class="book.count<book.stock? 'text-danger':''"></i>
                                         </div>
                                     </div>
                                     <div class="money col-md-2 ml-1">
@@ -94,14 +97,26 @@
                 showShopCart: false,
             }
         },
-        props: {
-            orders: Array
-        },
         computed: {
             ...mapState({
                 books: state => state.ShopCart.books,
                 isLogin: state => state.Person.isLogin
             }),
+            urls: function () {
+                let urls = []
+                for (let book of this.books) {
+                    if (Object.keys(book).length != 0 && book.url != null) {
+                        let index = book.url.lastIndexOf("\\")
+                        let url = book.url.slice(index+1, book.url.length)
+                        url = "./images/"+url
+                        urls.push(url)
+                    }
+
+                    urls.push("./")
+                }
+
+                return urls
+            },
             total () {
                 let total_money = 0;
                 let total_books = 0;
@@ -123,8 +138,10 @@
                     this.$store.commit('ShopCart/substract', index)
             },
 
-            add (index) {
-                this.$store.commit('ShopCart/add', index)
+            add (count, stock, index) {
+                if (count < stock) {
+                    this.$store.commit('ShopCart/add', index)
+                }
             },
 
             submitOrder () {
