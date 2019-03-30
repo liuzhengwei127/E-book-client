@@ -14,7 +14,7 @@
             <div class="col-md-2">
                 <div class="isbn mt-3 mb-5">ISBN:{{book.isbn}}</div>
                 <div class="stock mb-2">库存   {{book.stock}}</div>
-                <div class="price">{{book.price}}元</div>
+                <div class="price">{{Math.round(book.price*100)/100}}元</div>
             </div>
             <div class="col-md-2" v-if="!isManager">
                 <div class="row mt-5 mb-2">

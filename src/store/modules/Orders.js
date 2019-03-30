@@ -18,11 +18,12 @@ const actions = {
                 const order = []
                 for (let item of items) {
                     const book = {
-                         author: item.author,
-                         name: item.bookname,
-                         count: item.count,
-                         price: item.price,
-                         total: item.price*item.count
+                        author: item.author,
+                        name: item.bookname,
+                        count: item.count,
+                        price: item.price,
+                        total: item.price*item.count,
+                        url: item.url
                      }
                      order.push(book)
                 }
@@ -43,7 +44,8 @@ const actions = {
                         name: item.bookname,
                         count: item.count,
                         price: item.price,
-                        total: item.price*item.count
+                        total: item.price*item.count,
+                        url: item.url
                     }
                     order.push(book)
                 }

@@ -18,14 +18,14 @@
                     ×{{book.count}}
                 </div>
                 <div class="col-md-2">
-                    {{book.price}}元
+                    {{Math.round(book.price*100)/100}}元
                 </div>
             </div>
             <hr>
             <div class="total text-right">
                 总计
                 <div class="money text-danger">
-                    ￥{{book.total}}
+                    ￥{{Math.round(book.total*100)/100}}
                 </div>
             </div>
         </div>
@@ -47,6 +47,7 @@
                         let url = book.url.slice(index+1, book.url.length)
                         url = "./images/"+url
                         urls.push(url)
+                        continue
                     }
 
                     urls.push("./")

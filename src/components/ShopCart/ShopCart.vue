@@ -32,7 +32,7 @@
                                         </div>
                                     </div>
                                     <div class="money col-md-2 ml-1">
-                                        ￥{{ book.money }}
+                                        ￥{{ Math.round(book.money*100)/100 }}
                                     </div>
                                 </div>
                                 <div class="row">
@@ -49,7 +49,7 @@
                                 <div class="container">
                                     <div class="row">
                                         <div class="totaltxt mt-1">总计</div>
-                                        <div class="text-danger totalmoney">￥{{total.total_money}}</div>
+                                        <div class="text-danger totalmoney">￥{{Math.round(total.total_money*100)/100}}</div>
                                     </div>
                                 </div>
                             </div>
@@ -111,6 +111,7 @@
                         let url = book.url.slice(index+1, book.url.length)
                         url = "./images/"+url
                         urls.push(url)
+                        continue
                     }
 
                     urls.push("./")
