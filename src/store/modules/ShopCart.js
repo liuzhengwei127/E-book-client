@@ -39,8 +39,13 @@ const actions = {
                 }
             })
 
-            if (!repeat)
-                state.books.push(book)
+            if (!repeat) {
+                if (book.stock === 0) {
+                    reject("exceed")
+                } else {
+                    state.books.push(book)
+                }
+            }
 
             resolve("succeed")
         })

@@ -1,10 +1,10 @@
 <template>
     <div class="container mb-5 mt-5">
         <i class="iconfont icon-dingdan"></i>
-        <div v-for="(book) in order" :key="book.name" class="mt-3 mb-5">
+        <div v-for="(book, index) in order" :key="book.name" class="mt-3 mb-5">
             <div class="row">
                 <div class="imgbox col-md-2">
-                    <img :src="book.cover" class="img-thumbnail" alt="Responsive image">
+                    <img :src="urls[index]" class="img-thumbnail" alt="Responsive image">
                 </div>
                 <div class="col-md-6">
                     <div class="name mb-3 mt-3">
@@ -38,6 +38,23 @@
         props: {
             order: Array
         },
+        computed: {
+            urls: function () {
+                let urls = []
+                for (let book of this.order) {
+                    if (Object.keys(book).length != 0 && book.url != null) {
+                        let index = book.url.lastIndexOf("\\")
+                        let url = book.url.slice(index+1, book.url.length)
+                        url = "./images/"+url
+                        urls.push(url)
+                    }
+
+                    urls.push("./")
+                }
+
+                return urls
+            },
+        }
     }
 </script>
 

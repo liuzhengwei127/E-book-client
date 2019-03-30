@@ -102,6 +102,7 @@
                 books: state => state.ShopCart.books,
                 isLogin: state => state.Person.isLogin
             }),
+
             urls: function () {
                 let urls = []
                 for (let book of this.books) {
@@ -159,6 +160,7 @@
                     reqAddOrder(order).then(() => {
                         this.$store.commit('ShopCart/clearShopCart')
                         this.$message.success("成功提交订单!感谢您的购物~")
+                        this.$store.dispatch('Books/getAllBook')
                     })
 
                 } else {

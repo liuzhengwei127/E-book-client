@@ -3,6 +3,7 @@ import axios from 'axios'
 // 包装的axios ajax请求接口
 export default function ajax (url, data={}, method='GET') {
 
+    console.log(data)
     return new Promise(function (resolve, reject) {
         let promise
 
