@@ -84,7 +84,7 @@
                         <el-input v-model="form.author"></el-input>
                     </el-form-item>
                     <el-form-item label="ISBN">
-                        <el-input v-model="form.isbn"></el-input>
+                        <el-input v-model="form.newisbn"></el-input>
                     </el-form-item>
                     <el-form-item label="简介">
                         <el-input v-model="form.outline" type="textarea" :rows="5"></el-input>
@@ -139,6 +139,7 @@
             book: Object,
             index: Number,
         },
+
         data() {
             return {
                 count: 1,
@@ -148,10 +149,11 @@
                     name: this.book.name,
                     author: this.book.author,
                     isbn: this.book.isbn,
+                    newisbn: this.book.isbn,
                     outline: this.book.outline,
                     stock: this.book.stock,
                     price: this.book.price,
-                }
+                },
             }
         },
         methods: {
@@ -184,12 +186,23 @@
             },
 
             book_modify () {
-                reqModifyBook(this.form).then(() => {
-                    this.$message.success("成功修改书籍信息")
-                    this.fileList = []
-                    this.dialogVisible = !this.dialogVisible
+                reqModifyBook(this.form).then( () => {
                     this.$store.dispatch('Books/getAllBook')
+                    this.form.isbn = this.form.newisbn
+                    this.$message.success("成功修改书籍信息")
+                    this.dialogVisible = !this.dialogVisible
+                    this.fileList = []
                 })
+            },
+
+            formUpdate() {
+                this.form.name = this.book.name
+                this.form.author=this.book.author
+                this.form.isbn=this.book.isbn
+                this.form.newisbn=this.book.isbn
+                this.form.outline=this.book.outline
+                this.form.stock=this.book.stock
+                this.form.price=this.book.price
             },
 
             beforeRemove (file) {
@@ -221,6 +234,12 @@
                 return "./"
             }
         },
+
+        watch: {
+            book() {
+                this.formUpdate()
+            }
+        }
     }
 </script>
 
