@@ -69,7 +69,7 @@
                 <span slot="footer" class="dialog-footer">
                     <el-row>
                         <el-col :span="6" :offset="18">
-                            <el-input-number v-model="count" controls-position="right" :min="1" size="mini"></el-input-number>
+                            <el-input-number v-model="count" controls-position="right" :min="1" :max="form.stock"  size="mini"></el-input-number>
                             <el-button type="danger" class="mr-2" @click="addtocart">加入购物车</el-button>
                         </el-col>
                     </el-row>

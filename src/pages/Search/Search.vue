@@ -18,7 +18,7 @@
             </ul>
             <div v-show="books.length === 0" class="container mt-5">
                 <div class="row">
-                    <div style="font-family: 等线">
+                    <div style="font-family: 等线" v-show="!init">
                         暂时没有您要搜索的书籍~
                     </div>
                 </div>
@@ -36,9 +36,15 @@
         components: {
             Book,
         },
+        mounted() {
+            this.filter = ""
+            this.$store.dispatch('Books/searchBook', this.filter)
+            this.init = true
+        },
         data() {
             return {
                 filter: "",
+                init: true,
             }
         },
         computed: {
@@ -49,6 +55,7 @@
         methods: {
             searchBook() {
                 this.$store.dispatch('Books/searchBook', this.filter)
+                init = false
             }
         }
     }
