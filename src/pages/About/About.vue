@@ -5,11 +5,10 @@
         <div>
             <div>
                 <span>
-                    Follow me on
+                    Some advice? Welcome to issue.
                     <i class="iconfont icon-github"></i>
-                    <a href="https://www.github.com/liuzhengwei127">Github</a>
+                    <a href="https://www.github.com/liuzhengwei127">五柳寄书</a>
                 </span>
-
             </div>
         </div>
     </div>
