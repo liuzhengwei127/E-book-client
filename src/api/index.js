@@ -55,3 +55,6 @@ export const reqSearchBook = (filter) => ajax(BASE_URL+'/book/search', {filter})
 
 // 12、删除上传的书籍图片
 export const reqDeleteImg = (filename) => ajax(BASE_URL+'/delete', {filename})
+
+// 13、获得书籍详情
+export const reqGetBookDetail = (ISBN) => ajax(BASE_URL+'/book/detail', {ISBN})

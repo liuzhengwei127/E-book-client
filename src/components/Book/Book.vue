@@ -1,10 +1,10 @@
 <template>
     <div class="container-fluid">
         <div class="row">
-            <div class="imgbox col-md-2" style="cursor: pointer" @click="dialogVisible=!dialogVisible">
+            <div class="imgbox col-md-2" style="cursor: pointer" @click="showDetail">
                 <img :src="url" class="img-thumbnail" alt="Responsive image">
             </div>
-            <div class="col-md-6" style="cursor: pointer"  @click="dialogVisible=!dialogVisible">
+            <div class="col-md-6" style="cursor: pointer"  @click="showDetail">
                 <div class="card-link link">
                     <div class="name mt-3 mb-2">{{book.name}}</div>
                     <div class="author mb-1">作者:{{book.author}}</div>
@@ -33,7 +33,7 @@
                 </button>
             </div>
             <div class="col-md-2" v-else>
-                <button class="btn btn-danger btn-block mt-5" @click="dialogVisible = !dialogVisible">
+                <button class="btn btn-danger btn-block mt-5" @click="showDetail">
                     修改信息
                 </button>
             </div>
@@ -44,26 +44,37 @@
                 :visible.sync="dialogVisible"
                 width="60%">
             <div v-if="!isManager">
-                <div class="row mb-3">
-                    <div class="imgbox col-md-4 mt-5">
-                        <img :src="url" class="img-thumbnail">
+                <div class="mt-2">
+                    <div class="row mb-3">
+                        <div class="imgbox col-md-4">
+                            <img :src="url" class="img-thumbnail">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="name">
+                                书名：{{detail.name}}
+                            </div>
+                            <div class="mt-1">
+                                作者：{{detail.author}}
+                            </div>
+                            <div class="mt-1">
+                                ISBN：{{detail.ISBN}}
+                            </div>
+                            <div class="mt-1">
+                                出版社:{{detail.press}}
+                            </div>
+                            <div class="mt-1">
+                                出版年:{{detail.year}}
+                            </div>
+                            <div class="mt-1">
+                                页数:{{detail.pages}}
+                            </div>
+                            <div class="mt-1">
+                                库存:{{detail.stock}}
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-md-8 mt-4">
-                        <div class="name">
-                            书名：{{book.name}}
-                        </div>
-                        <div class="author">
-                            作者：{{book.author}}
-                        </div>
-                        <div class="isbn mt-2">
-                            ISBN：{{book.isbn}}
-                        </div>
-                        <div class="outline mt-1">
-                            简介：{{book.outline}}
-                        </div>
-                        <div class="mt-2">
-                            库存:{{book.stock}}
-                        </div>
+                    <div class="outline mt-1 ml-5 mr-5">
+                        简介：{{detail.outline}}
                     </div>
                 </div>
                 <span slot="footer" class="dialog-footer">
@@ -76,28 +87,45 @@
                 </span>
             </div>
             <div v-else>
-                <el-form ref="form" :model="form" label-width="80px">
+                <el-form ref="form" :model="detail" label-width="80px">
                     <el-form-item label="书名">
-                        <el-input v-model="form.name"></el-input>
+                        <el-input v-model="detail.name"></el-input>
                     </el-form-item>
                     <el-form-item label="作者">
-                        <el-input v-model="form.author"></el-input>
+                        <el-input v-model="detail.author"></el-input>
                     </el-form-item>
                     <el-form-item label="ISBN">
-                        <el-input v-model="form.newisbn"></el-input>
+                        <el-input v-model="newisbn"></el-input>
                     </el-form-item>
                     <el-form-item label="简介">
-                        <el-input v-model="form.outline" type="textarea" :rows="5"></el-input>
+                        <el-input v-model="detail.outline" type="textarea" :rows="5"></el-input>
                     </el-form-item>
                     <el-form-item label="库存">
                         <el-row>
-                            <el-col :span="24" class="mb-2"><el-input-number v-model="form.stock" controls-position="right" :min="1" size="mini"></el-input-number></el-col>
+                            <el-col :span="24" class="mb-2"><el-input-number v-model="detail.stock" controls-position="right" :min="1" size="mini"></el-input-number></el-col>
                         </el-row>
                     </el-form-item>
                     <el-form-item label="价格">
                         <el-row>
                             <el-col :span="24" class="mb-2">
-                                <el-input-number v-model="form.price" controls-position="right" :min="1" size="mini"></el-input-number>元
+                                <el-input-number v-model="detail.price" controls-position="right" :min="1" size="mini"></el-input-number>元
+                            </el-col>
+                        </el-row>
+                    </el-form-item>
+                    <el-form-item label="页数">
+                        <el-row>
+                            <el-col :span="24" class="mb-2">
+                                <el-input-number v-model="detail.pages" controls-position="right" :min="1" size="mini"></el-input-number>页
+                            </el-col>
+                        </el-row>
+                    </el-form-item>
+                    <el-form-item label="出版社">
+                        <el-input v-model="detail.press"></el-input>
+                    </el-form-item>
+                    <el-form-item label="出版年">
+                        <el-row>
+                            <el-col :span="24" class="mb-2">
+                                <el-input-number v-model="detail.year" controls-position="right" :min="1" size="mini"></el-input-number>年
                             </el-col>
                         </el-row>
                     </el-form-item>
@@ -131,7 +159,7 @@
 
 <script>
     import {mapState} from 'vuex'
-    import {reqModifyBook, reqDeleteImg} from "../../api";
+    import {reqModifyBook, reqDeleteImg, reqGetBookDetail} from "../../api";
 
     export default {
         name: "Book",
@@ -145,15 +173,17 @@
                 count: 1,
                 dialogVisible: false,
                 fileList: [],
+                detail: {
+                },
                 form: {
                     name: this.book.name,
                     author: this.book.author,
                     isbn: this.book.isbn,
-                    newisbn: this.book.isbn,
                     outline: this.book.outline,
                     stock: this.book.stock,
                     price: this.book.price,
                 },
+                newisbn: this.book.isbn,
             }
         },
         methods: {
@@ -188,7 +218,7 @@
             book_modify () {
                 reqModifyBook(this.form).then( () => {
                     this.$store.dispatch('Books/getAllBook')
-                    this.form.isbn = this.form.newisbn
+                    this.form.isbn = this.newisbn
                     this.$message.success("成功修改书籍信息")
                     this.dialogVisible = !this.dialogVisible
                     this.fileList = []
@@ -199,7 +229,7 @@
                 this.form.name = this.book.name
                 this.form.author=this.book.author
                 this.form.isbn=this.book.isbn
-                this.form.newisbn=this.book.isbn
+                this.newisbn=this.book.isbn
                 this.form.outline=this.book.outline
                 this.form.stock=this.book.stock
                 this.form.price=this.book.price
@@ -217,11 +247,19 @@
 
             onSuccess (response) {
                 this.form.url = response
+            },
+
+            // ajax显示书籍详情
+            showDetail () {
+                reqGetBookDetail(this.book.isbn).then((data) => {
+                    this.detail = data
+                    this.dialogVisible = !this.dialogVisible
+                })
             }
         },
         computed: {
             ...mapState({
-                isManager: state => state.Person.isManager,
+                isManager: state => state.Person.isManager
             }),
             url: function () {
                 if (Object.keys(this.book).length != 0 && this.book.url != null) {
