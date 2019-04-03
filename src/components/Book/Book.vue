@@ -184,6 +184,7 @@
                     price: this.book.price,
                 },
                 newisbn: this.book.isbn,
+                url_return: '',
             }
         },
         methods: {
@@ -207,7 +208,7 @@
                     count: this.count,
                     price: this.book.price,
                     money: this.count*this.book.price,
-                    stock: this.book.stock
+                    stock: this.book.stock,
                 }).then(() => {
                     this.$message.success("成功加入购物车")
                 }).catch(() => {
@@ -216,7 +217,7 @@
             },
 
             book_modify () {
-                reqModifyBook(this.form).then( () => {
+                reqModifyBook(this.detail,this.newisbn,this.url_return).then( () => {
                     this.$store.dispatch('Books/getAllBook')
                     this.form.isbn = this.newisbn
                     this.$message.success("成功修改书籍信息")
@@ -246,7 +247,7 @@
             },
 
             onSuccess (response) {
-                this.form.url = response
+                this.url_return = response
             },
 
             // ajax显示书籍详情

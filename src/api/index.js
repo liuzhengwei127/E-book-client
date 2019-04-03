@@ -22,23 +22,28 @@ export const reqAddBook = (book) => ajax(BASE_URL+'/book/add', {
     name: book.name,
     author: book.author,
     isbn: book.isbn,
-    newisbn: book.newisbn,
     outline: book.outline,
     price: book.price,
     stock: book.stock,
     url: book.url,
+    press: book.press,
+    year: book.year,
+    pages: book.pages,
 }, 'POST')
 
 // 7、修改书籍
-export const reqModifyBook = (book) => ajax(BASE_URL+'/book/modify', {
+export const reqModifyBook = (book,newisbn,url) => ajax(BASE_URL+'/book/modify', {
     name: book.name,
     author: book.author,
     isbn: book.isbn,
-    newisbn: book.newisbn,
+    newisbn: newisbn,
     outline: book.outline,
     price: book.price,
     stock: book.stock,
-    url: book.url
+    url: url,
+    press: book.press,
+    year: book.year,
+    pages: book.pages,
 }, 'POST')
 
 // 8、获得相应用户订单

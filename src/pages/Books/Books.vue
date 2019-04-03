@@ -29,6 +29,11 @@
                     <el-form-item label="简介" prop="outline">
                         <el-input v-model="form.outline" type="textarea" :rows="5"></el-input>
                     </el-form-item>
+                    <el-form-item label="页数" prop="pages">
+                        <el-row>
+                            <el-col :span="24" class="mb-2"><el-input-number v-model="form.pages" controls-position="right" :min="1" size="mini"></el-input-number></el-col>
+                        </el-row>
+                    </el-form-item>
                     <el-form-item label="库存" prop="stock">
                         <el-row>
                             <el-col :span="24" class="mb-2"><el-input-number v-model="form.stock" controls-position="right" :min="1" size="mini"></el-input-number></el-col>
@@ -40,6 +45,12 @@
                                 <el-input-number v-model="form.price" controls-position="right" :min="1" size="mini"></el-input-number>元
                             </el-col>
                         </el-row>
+                    </el-form-item>
+                    <el-form-item label="出版社" prop="press">
+                        <el-input v-model="form.press"></el-input>
+                    </el-form-item>
+                    <el-form-item label="出版年" prop="year">
+                        <el-input v-model="form.year"></el-input>
                     </el-form-item>
                     <el-form-item label="封面">
                         <el-row>
@@ -98,6 +109,9 @@
                     stock: undefined,
                     price: undefined,
                     url: '',
+                    press: '',
+                    year: undefined,
+                    pages: undefined,
                 },
                 rules: {
                     name: [
@@ -117,6 +131,15 @@
                     ],
                     price: [
                         {required:true, message: '请输入价格', trigger: 'change'}
+                    ],
+                    press: [
+                        {required:true, message: '请输入出版商', trigger: 'change'}
+                    ],
+                    year: [
+                        {required:true, message: '请输入出版年', trigger: 'change'}
+                    ],
+                    pages: [
+                        {required:true, message: '请输入页数', trigger: 'change'}
                     ],
                 },
                 imageUrl: '',
