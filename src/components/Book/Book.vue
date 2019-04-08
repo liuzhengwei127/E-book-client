@@ -184,7 +184,7 @@
                     price: this.book.price,
                 },
                 newisbn: this.book.isbn,
-                url_return: '',
+                url_return: null,
             }
         },
         methods: {
@@ -234,6 +234,7 @@
                 this.form.outline=this.book.outline
                 this.form.stock=this.book.stock
                 this.form.price=this.book.price
+                this.url_return = null
             },
 
             beforeRemove (file) {
