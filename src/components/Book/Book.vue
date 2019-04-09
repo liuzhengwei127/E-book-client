@@ -33,8 +33,11 @@
                 </button>
             </div>
             <div class="col-md-2" v-else>
-                <button class="btn btn-danger btn-block mt-5" @click="showDetail">
+                <button class="btn btn-primary btn-block mt-5" @click="showDetail">
                     修改信息
+                </button>
+                <button class="btn btn-danger btn-block mt-5" @click="deleteBook">
+                    删除书籍
                 </button>
             </div>
         </div>
@@ -159,7 +162,7 @@
 
 <script>
     import {mapState} from 'vuex'
-    import {reqModifyBook, reqDeleteImg, reqGetBookDetail} from "../../api";
+    import {reqModifyBook, reqDeleteImg, reqGetBookDetail, reqDeleteBook, reqGetAllBook} from "../../api";
 
     export default {
         name: "Book",
@@ -256,6 +259,20 @@
                 reqGetBookDetail(this.book.isbn).then((data) => {
                     this.detail = data
                     this.dialogVisible = !this.dialogVisible
+                })
+            },
+
+            deleteBook () {
+                reqDeleteBook(this.book.isbn).then((data) => {
+                    if (data == "删除成功") {
+                        this.$store.dispatch('Books/getAllBook').then(() => {
+                            this.$message.success(data)
+                        })
+                    } else {
+                        this.$message.error(data)
+                    }
+                }).catch((data) => {
+                    this.$message.error(data)
                 })
             }
         },

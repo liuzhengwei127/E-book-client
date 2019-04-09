@@ -63,3 +63,6 @@ export const reqDeleteImg = (filename) => ajax(BASE_URL+'/delete', {filename})
 
 // 13、获得书籍详情
 export const reqGetBookDetail = (ISBN) => ajax(BASE_URL+'/book/detail', {ISBN})
+
+// 14、删除书籍
+export const reqDeleteBook = (ISBN) => ajax(BASE_URL+'/book/delete', {ISBN})
