@@ -66,3 +66,6 @@ export const reqGetBookDetail = (ISBN) => ajax(BASE_URL+'/book/detail', {ISBN})
 
 // 14、删除书籍
 export const reqDeleteBook = (ISBN) => ajax(BASE_URL+'/book/delete', {ISBN})
+
+// 15、判断用户最近是否登录
+export const reqInitLogin = () => ajax(BASE_URL+'/user/init')

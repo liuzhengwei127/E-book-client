@@ -8,11 +8,30 @@
 
 <script>
     import Navbar from './components/Navbar/Navbar'
-    import ShopCart from "./components/ShopCart/ShopCart";
+    import ShopCart from "./components/ShopCart/ShopCart"
     import {mapState} from 'vuex'
+    import {reqInitLogin} from './api'
 
 export default {
     name: 'app',
+    mounted () {
+        reqInitLogin().then((data) => {
+            if (data.name != null) {
+                if (data.login) {
+                    if (data.code) {
+                        this.$store.commit('Person/changeManager')
+                        this.$store.commit('Person/changeLogin')
+                        this.$store.commit('Person/setAccount', data.account)
+                        this.$router.push('/books')
+                    } else {
+                        this.$store.commit('Person/changeLogin')
+                        this.$store.commit('Person/setAccount', data.account)
+                        this.$router.push('/home')
+                    }
+                }
+            }
+        })
+    },
     components:{
         ShopCart,
         Navbar
