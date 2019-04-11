@@ -55,7 +55,7 @@
         methods: {
             searchBook() {
                 this.$store.dispatch('Books/searchBook', this.filter)
-                init = false
+                this.init = false
             }
         }
     }

@@ -81,6 +81,7 @@
 
 <script>
     import {mapState} from 'vuex'
+    import {reqLogout} from '../../api'
 
     export default {
         name: "Navbar",
@@ -97,12 +98,14 @@
         },
         methods: {
             logout () {
-                this.$store.commit('Person/changeLogin')
-                if (this.isManager)
-                    this.$store.commit('Person/changeManager')
+                reqLogout().then((data) => {
+                    this.$store.commit('Person/changeLogin')
+                    if (this.isManager)
+                        this.$store.commit('Person/changeManager')
 
-                this.$router.push('/home')
-                this.$message.success("用户注销成功！")
+                    this.$router.push('/home')
+                    this.$message.success(data)
+                })
             }
         }
     }

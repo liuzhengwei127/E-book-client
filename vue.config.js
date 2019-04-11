@@ -1,5 +1,6 @@
 module.exports = {
     devServer: {
+        // 跨域代理
         proxy: {
             '/api': {
                 target: 'http://localhost:1211/',
@@ -10,5 +11,7 @@ module.exports = {
                 }
             }
         }
-    }
+    },
+    // 基本路径
+    publicPath: './',
 }
