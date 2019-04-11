@@ -9,6 +9,15 @@ module.exports = {
                 pathRewrite: {
                     '^/api': ''
                 }
+            },
+
+            '/images': {
+                target: 'http://47.100.236.223:1211/images/',
+                changeOrigin: true,
+                ws: true,
+                pathRewrite: {
+                    '^/images': ''
+                }
             }
         }
     },

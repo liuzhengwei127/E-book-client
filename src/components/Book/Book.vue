@@ -162,7 +162,7 @@
 
 <script>
     import {mapState} from 'vuex'
-    import {reqModifyBook, reqDeleteImg, reqGetBookDetail, reqDeleteBook, reqGetAllBook} from "../../api";
+    import {reqModifyBook, reqDeleteImg, reqGetBookDetail, reqDeleteBook} from "../../api";
 
     export default {
         name: "Book",
@@ -282,9 +282,7 @@
             }),
             url: function () {
                 if (Object.keys(this.book).length != 0 && this.book.url != null) {
-                    let index = this.book.url.lastIndexOf("\\")
-                    let url = this.book.url.slice(index+1, this.book.url.length)
-                    url = "./images/"+url
+                    let url = "/images/"+ this.book.url
                     return url
                 }
 
