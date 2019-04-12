@@ -1,4 +1,4 @@
-import {reqGetOrder, reqGetAllOrder} from "../../api";
+import {reqGetOrder, reqGetAllOrder, reqSearchOrder} from "../../api";
 
 const state = {
     orders: []
@@ -35,6 +35,29 @@ const actions = {
 
     getAllOrder({commit}) {
         reqGetAllOrder().then((data) => {
+            const orders = []
+            for (let items of data.orders) {
+                const order = []
+                for (let item of items) {
+                    const book = {
+                        author: item.author,
+                        name: item.bookname,
+                        count: item.count,
+                        price: item.price,
+                        total: item.price*item.count,
+                        url: item.url
+                    }
+                    order.push(book)
+                }
+                orders.push(order)
+            }
+            commit('updateOrder', orders)
+        })
+    },
+
+    searchOrder({commit}, filter) {
+        reqSearchOrder(filter).then((data) => {
+            console.log(data)
             const orders = []
             for (let items of data.orders) {
                 const order = []

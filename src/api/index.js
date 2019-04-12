@@ -72,3 +72,6 @@ export const reqInitLogin = () => ajax(BASE_URL+'/user/init')
 
 // 16、用户登出
 export const reqLogout = () => ajax(BASE_URL+'/user/logout')
+
+// 17、搜索订单
+export const reqSearchOrder = (filter) => ajax(BASE_URL+'/order/search', {filter})
