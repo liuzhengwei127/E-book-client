@@ -57,7 +57,6 @@ const actions = {
 
     searchOrder({commit}, filter) {
         reqSearchOrder(filter).then((data) => {
-            console.log(data)
             const orders = []
             for (let items of data.orders) {
                 const order = []
