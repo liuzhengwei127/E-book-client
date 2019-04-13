@@ -48,23 +48,30 @@
             // 判断开始日期与结束日期时间跨度是否在1一个月内
             dateConstrain: function(time, order) {
                 let date = new Date(time)
+
                 if (date.getTime() >= Date.now())
                     return true
 
                 if (this.beginDate != null || this.endDate != null) {
                     if (this.beginDate != null && this.endDate != null) {
-                        let begin = new Date(this.beginDate)
-                        let end = new Date(this.endDate)
-                        return this.amongOneMonth(begin, end)
-                    } else {
-                        if (this.beginDate != null && order == "END") {
-                            var begin = new Date(this.beginDate)
-                            var end = new Date(time)
+                        if (order == "BEGIN") {
+                            let begin = new Date(time)
+                            let end = new Date(this.endDate)
+                            return this.amongOneMonth(begin, end)
+                        } else {
+                            let begin = new Date(this.beginDate)
+                            let end = new Date(time)
                             return this.amongOneMonth(begin, end)
                         }
+                    } else {
+                        if (this.beginDate != null && order == "END") {
+                            let begin = new Date(this.beginDate)
+                            let end = new Date(time)
+                            return this.amongOneMonth(begin, end)
+                         }
                         if (this.endDate != null && order == "BEGIN") {
-                            var begin = new Date(time)
-                            var end = new Date(this.endDate)
+                            let begin = new Date(time)
+                            let end = new Date(this.endDate)
                             return this.amongOneMonth(begin, end)
                         }
                     }
@@ -76,7 +83,7 @@
             amongOneMonth: function (begin, end) {
                 if (begin.getTime() < end.getTime()
                     && (begin.getMonth() == end.getMonth()
-                        || ((end.getMonth()-begin.getMonth() === 1 || (begin.state.getMonth() == 11 && end.state.getMonth() == 0))
+                        || ((end.getMonth()-begin.getMonth() === 1 || (begin.getMonth() == 11 && end.getMonth() == 0))
                             && begin.getDate() >= end.getDate())))
                     return false
                 return true
