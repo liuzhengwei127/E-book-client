@@ -1,19 +1,35 @@
 <template>
     <div class="container mt-5">
-        <div>
-            开始时间
-            <input type="date" class="date-picker"></input>
-        </div>
-        <div>
-            结束时间
-            <input type="date" class="date-picker"></input>
-        </div>
+        <el-row>
+            <el-col :span="8">
+                <div class="mb-2">开始日期</div>
+                <el-date-picker
+                        v-model="beginDate"
+                        type="date"
+                        placeholder="选择日期">
+                </el-date-picker>
+            </el-col>
+            <el-col :span="8">
+                <div class="mb-2">结束日期</div>
+                <el-date-picker
+                        v-model="endDate"
+                        type="date"
+                        placeholder="选择日期">
+                </el-date-picker>
+            </el-col>
+        </el-row>
     </div>
 </template>
 
 <script>
     export default {
-        name: "Statistics"
+        name: "Statistics",
+        data() {
+            return {
+                beginDate: undefined,
+                endDate: undefined,
+            }
+        }
     }
 </script>
 
