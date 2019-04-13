@@ -22,6 +22,7 @@
                 </el-date-picker>
             </el-col>
         </el-row>
+        <ve-line :data="chartData" :settings="chartSettings" class="mt-5" v-if="datePicked"></ve-line>
     </div>
 </template>
 
@@ -29,6 +30,11 @@
     export default {
         name: "Statistics",
         data() {
+            this.chartSettings = {
+                axisSite: { right: ['购买书目'] },
+                yAxisType: ['KMB', 'KMB'],
+                yAxisName: ['元', '本']
+            }
             return {
                 beginDate: null,
                 endDate: null,
@@ -42,6 +48,16 @@
                         return this.dateConstrain(time, "END")
                     }
                 },
+                chartData: {
+                    columns:['日期','花费金额', '购买书目'],
+                    rows: [
+                        {'日期': '3/1', '花费金额':21, '购买书目': 1},
+                        {'日期': '3/2', '花费金额':123, '购买书目': 3},
+                        {'日期': '3/3', '花费金额':12, '购买书目': 1},
+                        {'日期': '3/4', '花费金额':0, '购买书目': 0},
+                        {'日期': '3/5', '花费金额':240, '购买书目': 6},
+                    ]
+                }
             }
         },
         methods: {
@@ -53,27 +69,14 @@
                     return true
 
                 if (this.beginDate != null || this.endDate != null) {
-                    if (this.beginDate != null && this.endDate != null) {
-                        if (order == "BEGIN") {
-                            let begin = new Date(time)
-                            let end = new Date(this.endDate)
-                            return this.amongOneMonth(begin, end)
-                        } else {
-                            let begin = new Date(this.beginDate)
-                            let end = new Date(time)
-                            return this.amongOneMonth(begin, end)
-                        }
+                    if (order == "BEGIN") {
+                        let begin = new Date(time)
+                        let end = new Date(this.endDate)
+                        return this.amongOneMonth(begin, end)
                     } else {
-                        if (this.beginDate != null && order == "END") {
-                            let begin = new Date(this.beginDate)
-                            let end = new Date(time)
-                            return this.amongOneMonth(begin, end)
-                         }
-                        if (this.endDate != null && order == "BEGIN") {
-                            let begin = new Date(time)
-                            let end = new Date(this.endDate)
-                            return this.amongOneMonth(begin, end)
-                        }
+                        let begin = new Date(this.beginDate)
+                        let end = new Date(time)
+                        return this.amongOneMonth(begin, end)
                     }
                 }
 
@@ -88,16 +91,14 @@
                     return false
                 return true
             }
+        },
+        computed: {
+            datePicked: function () {
+                return (this.beginDate != null && this.endDate != null)
+            }
         }
     }
 </script>
 
 <style scoped>
-.date-picker{
-    border: 1px solid #ccc;
-    border-radius: 2px;
-    box-shadow: inset 0 1px #fff, 0 1px #eee;
-    background-color: #eee;
-    background-image: -webkit-linear-gradient(top, #f0f0f0, #e6e6e6);
-}
 </style>
