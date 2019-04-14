@@ -146,7 +146,7 @@
                             account: this.SignIn.account,
                             password: this.SignIn.password
                         }).then((data) => {
-                            if (data.login) {
+                            if (data.isLogin) {
                                 if (data.code) {
                                     this.$store.commit('Person/changeManager')
                                     this.$store.commit('Person/changeLogin')

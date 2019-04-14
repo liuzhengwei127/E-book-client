@@ -75,3 +75,6 @@ export const reqLogout = () => ajax(BASE_URL+'/user/logout')
 
 // 17、搜索订单
 export const reqSearchOrder = (filter) => ajax(BASE_URL+'/order/search', {filter})
+
+// 18、日期筛选订单
+export const reqDateOrderFilter = (beginDate, endDate, account) => ajax(BASE_URL+'/order/date', {beginDate, endDate, account})

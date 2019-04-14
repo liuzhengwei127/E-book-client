@@ -1,7 +1,8 @@
 import {reqGetOrder, reqGetAllOrder, reqSearchOrder} from "../../api";
 
 const state = {
-    orders: []
+    orders: [],
+    filteredOrders: [],
 }
 
 const mutations = {
