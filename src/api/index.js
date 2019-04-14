@@ -78,3 +78,6 @@ export const reqSearchOrder = (filter) => ajax(BASE_URL+'/order/search', {filter
 
 // 18、日期筛选订单
 export const reqDateOrderFilter = (beginDate, endDate, account) => ajax(BASE_URL+'/order/date', {beginDate, endDate, account})
+
+// 19、日期筛选订单详情
+export const reqDateDetailOrderFilter = (beginDate, endDate, account) => ajax(BASE_URL+'/order/dateDetail', {beginDate, endDate, account})

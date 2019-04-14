@@ -23,11 +23,24 @@
             </el-col>
         </el-row>
         <ve-line :data="chartData" :settings="chartSettings" class="mt-5" v-if="datePicked"></ve-line>
+        <div v-if="datePicked">
+            <el-card  class="mt-5">
+                <div>用户 {{$store.state.Person.account}} 的购买记录</div>
+                <el-timeline :reverse="reverse" class="mt-4 mb-2">
+                    <el-timeline-item
+                            v-for="(activity, index) in activities"
+                            :key="index"
+                            :timestamp="activity.timestamp">
+                        <div class="text-wrapper">{{activity.content}}</div>
+                    </el-timeline-item>
+                </el-timeline>
+            </el-card>
+        </div>
     </div>
 </template>
 
 <script>
-    import {reqDateOrderFilter} from "../../api"
+    import {reqDateOrderFilter, reqDateDetailOrderFilter} from "../../api"
 
     export default {
         name: "Statistics",
@@ -40,6 +53,8 @@
             return {
                 beginDate: null,
                 endDate: null,
+                datePicked: false,
+                reverse: true,
                 beginPickerOptions: {
                     disabledDate: (time) => {
                         return this.dateConstrain(time, "BEGIN")
@@ -54,7 +69,16 @@
                     columns:['日期','花费金额', '购买书目'],
                     rows: []
                 },
-                datePicked: false,
+                activities: [{
+                    content: '活动按期开始',
+                    timestamp: '2018-04-15'
+                }, {
+                    content: '通过审核',
+                    timestamp: '2018-04-13'
+                }, {
+                    content: '创建成功',
+                    timestamp: '2018-04-11'
+                }],
             }
         },
         methods: {
@@ -107,7 +131,7 @@
             // 当用户选择完开始日期与结束日期后，对v-charts表中数据进行更新
             dateDiff() {
                 this.chartData.rows = []
-                reqDateOrderFilter(this.beginDate,this.endDate,this.$store.state.Person.account)
+                reqDateOrderFilter(this.beginDate,this.endDate, this.$store.state.Person.account)
                     .then((data) => {
                         let date = new Date(this.beginDate)
                         for (let i=0;i<this.dateDiff;i++) {
@@ -125,6 +149,7 @@
                                 }
                             }
 
+                            // 处理未购买书的天数
                             if (!exist) {
                                 this.chartData.rows.push({
                                     '日期': (date.getMonth()+1).toString()+"/"+date.getDate(),
@@ -134,13 +159,36 @@
                             }
                             date.setDate(date.getDate() + 1)
                         }
+                        reqDateDetailOrderFilter(this.beginDate,this.endDate, this.$store.state.Person.account).then((data) => {
+                            let list = []
+                            let dateList = {content: ''}
+                            if (data.length > 0) {
+                                dateList.timestamp = data[0].date
+                                for (let order of data) {
+                                    if (order.date == dateList.timestamp) {
+                                        dateList.content += "购买《"+order.bookName+"》×"+order.count+"  花费"+Math.round(order.amount*100)/100+"元 \n"
+                                        console.log(dateList.content)
+                                    } else {
+                                        list.push(dateList)
+                                        dateList = {content: ''}
+                                        dateList.timestamp = order.date
+                                        dateList.content += "购买《"+order.bookName+"》×"+order.count+"  花费"+Math.round(order.amount*100)/100+"元 \n "
+                                    }
+                                }
+                                list.push(dateList)
+                            }
 
-                        this.datePicked = true
+                            this.activities = list
+                            this.datePicked = true
+                        })
                     })
-            }
+            },
         }
     }
 </script>
 
 <style scoped>
+    .text-wrapper {
+        white-space: pre-wrap;
+    }
 </style>
