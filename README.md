@@ -13,6 +13,8 @@ EBook是一个在线图书购买平台，项目采用Spring Boot+SpringMVC+Vue�
 3.SpringActuator  
 4.MyBatis  
 5.MySQL  
+6.Jackson   
+7.Lombok    
 
 ## 前端技术栈
 
