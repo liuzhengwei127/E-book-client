@@ -24,11 +24,11 @@
         </el-row>
         <ve-line :data="chartData" :settings="chartSettings" class="mt-5" v-if="datePicked"></ve-line>
         <div v-if="datePicked">
-            <el-card  class="mt-5">
-                <div>用户 {{$store.state.Person.account}} 的购买记录</div>
+            <el-card  class="mt-5" v-for="(object, index) in activities" :key="index">
+                <div>用户 {{object.account}} 的购买记录</div>
                 <el-timeline :reverse="reverse" class="mt-4 mb-2">
                     <el-timeline-item
-                            v-for="(activity, index) in activities"
+                            v-for="(activity, index) in object.list"
                             :key="index"
                             :timestamp="activity.timestamp">
                         <div class="text-wrapper">{{activity.content}}</div>
@@ -69,16 +69,7 @@
                     columns:['日期','花费金额', '购买书目'],
                     rows: []
                 },
-                activities: [{
-                    content: '活动按期开始',
-                    timestamp: '2018-04-15'
-                }, {
-                    content: '通过审核',
-                    timestamp: '2018-04-13'
-                }, {
-                    content: '创建成功',
-                    timestamp: '2018-04-11'
-                }],
+                activities: [],
             }
         },
         methods: {
@@ -131,6 +122,7 @@
             // 当用户选择完开始日期与结束日期后，对v-charts表中数据进行更新
             dateDiff() {
                 this.chartData.rows = []
+                // 获取日期筛选后的订单数据
                 reqDateOrderFilter(this.beginDate,this.endDate, this.$store.state.Person.account)
                     .then((data) => {
                         let date = new Date(this.beginDate)
@@ -159,23 +151,40 @@
                             }
                             date.setDate(date.getDate() + 1)
                         }
+                        // 获取日期筛选后的订单详细数据，用于制作时间线
                         reqDateDetailOrderFilter(this.beginDate,this.endDate, this.$store.state.Person.account).then((data) => {
                             let list = []
-                            let dateList = {content: ''}
+                            let accountList = []
+                            let dateObject = {content: ''}
+                            let accountObject = {}
                             if (data.length > 0) {
-                                dateList.timestamp = data[0].date
+                                dateObject.timestamp = data[0].date
+                                accountObject.account = data[0].account
                                 for (let order of data) {
-                                    if (order.date == dateList.timestamp) {
-                                        dateList.content += "购买《"+order.bookName+"》×"+order.count+"  花费"+Math.round(order.amount*100)/100+"元 \n"
-                                        console.log(dateList.content)
+                                    if (order.account == accountObject.account) {
+                                        if (order.date == dateObject.timestamp) {
+                                            dateObject.content += "购买《"+order.bookName+"》×"+order.count+"  花费"+Math.round(order.amount*100)/100+"元 \n"
+                                        } else {
+                                            accountList.push(dateObject)
+                                            dateObject = {content: ''}
+                                            dateObject.timestamp = order.date
+                                            dateObject.content += "购买《"+order.bookName+"》×"+order.count+"  花费"+Math.round(order.amount*100)/100+"元 \n"
+                                        }
                                     } else {
-                                        list.push(dateList)
-                                        dateList = {content: ''}
-                                        dateList.timestamp = order.date
-                                        dateList.content += "购买《"+order.bookName+"》×"+order.count+"  花费"+Math.round(order.amount*100)/100+"元 \n "
+                                        accountList.push(dateObject)
+                                        accountObject.list = accountList
+                                        list.push(accountObject)
+                                        accountObject = {}
+                                        accountObject.account = order.account
+                                        accountList = []
+                                        dateObject = {content: ''}
+                                        dateObject.timestamp = order.date
+                                        dateObject.content += "购买《"+order.bookName+"》×"+order.count+"  花费"+Math.round(order.amount*100)/100+"元 \n"
                                     }
                                 }
-                                list.push(dateList)
+                                accountList.push(dateObject)
+                                accountObject.list = accountList
+                                list.push(accountObject)
                             }
 
                             this.activities = list
