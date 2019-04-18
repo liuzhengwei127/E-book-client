@@ -171,6 +171,9 @@
             index: Number,
         },
 
+        mounted() {
+          this.fileListInit();
+        },
         data() {
             return {
                 count: 1,
@@ -191,6 +194,11 @@
             }
         },
         methods: {
+            fileListInit() {
+                this.fileList.push({
+                    name: this.book.url
+                })
+            },
             substract () {
                 if (this.count > 1)
                     this.count--
