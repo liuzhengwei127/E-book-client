@@ -195,9 +195,11 @@
         },
         methods: {
             fileListInit() {
-                this.fileList.push({
-                    name: this.book.url
-                })
+                if (this.book.url != null) {
+                    this.fileList.push({
+                        name: this.book.url
+                    })
+                }
             },
             substract () {
                 if (this.count > 1)
@@ -228,7 +230,7 @@
             },
 
             book_modify () {
-                reqModifyBook(this.detail,this.newisbn,this.url_return).then( () => {
+                reqModifyBook(this.detail,this.newisbn,this.url_return).then( (data) => {
                     this.$store.dispatch('Books/getAllBook')
                     this.form.isbn = this.newisbn
                     this.$message.success("成功修改书籍信息")

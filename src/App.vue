@@ -17,7 +17,7 @@ export default {
     mounted () {
         reqInitLogin().then((data) => {
             if (data.name != null) {
-                if (data.login) {
+                if (data.isLogin) {
                     if (data.code) {
                         this.$store.commit('Person/changeManager')
                         this.$store.commit('Person/changeLogin')
