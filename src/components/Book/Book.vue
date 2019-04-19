@@ -134,14 +134,15 @@
                     </el-form-item>
                     <el-form-item label="封面">
                         <el-row>
-                            <el-col :span="10">
+                            <el-col :span="15">
                                 <el-upload
                                         :on-remove="onRemove"
                                         :on-success="onSuccess"
+                                        :on-error="onError"
                                         :before-remove="beforeRemove"
-                                        :file-list="fileList"
-                                        class="upload-demo"
-                                        action="/api/upload">
+                                        :http-request="httpRequest"
+                                        list-type="picture"
+                                        :file-list="fileList">
                                     <el-button size="small" type="primary">点击上传</el-button>
                                     <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
                                 </el-upload>
@@ -163,7 +164,8 @@
 
 <script>
     import {mapState} from 'vuex'
-    import {reqModifyBook, reqDeleteImg, reqGetBookDetail, reqDeleteBook} from "../../api";
+    import {reqModifyBook, reqDeleteImg, reqGetBookDetail, reqDeleteBook} from "../../api"
+    import axios from 'axios'
 
     export default {
         name: "Book",
@@ -175,7 +177,10 @@
         mounted() {
             if (this.book.url != null) {
                 this.fileList = []
-                this.fileList.push({name: this.book.url})
+                this.fileList.push({
+                    name: this.book.url,
+                    url : "http://localhost:1211/images/"+this.book.url
+                })
             }
         },
         data() {
@@ -263,12 +268,38 @@
                 })
             },
 
-            onSuccess (response) {
-                this.url_return = response
+            onSuccess (data) {
+                this.url_return = data
             },
 
             onRemove () {
                 this.url_return = null
+            },
+
+            onError (err) {
+                this.$message.error(err)
+            },
+
+            httpRequest(data) {
+                let file = data.file
+                let url = '/api/upload'
+                let formData = new FormData()
+                formData.append("file",file)
+
+                axios({
+                    method: 'POST',
+                    url: url,
+                    headers: {
+                        'Content-Type': 'multipart/form-data;charset=UTF-8'
+                    },
+                    data: formData
+                }).then((response) => {
+                    if (response.data != "文件过大" && response.data != "文件名已存在" && response.data != "不支持的文件类型")
+                        data.onSuccess(response.data)
+                    else {
+                        data.onError(response.data)
+                    }
+                })
             },
 
             // ajax显示书籍详情
