@@ -136,6 +136,7 @@
                         <el-row>
                             <el-col :span="10">
                                 <el-upload
+                                        :on-remove="onRemove"
                                         :on-success="onSuccess"
                                         :before-remove="beforeRemove"
                                         :file-list="fileList"
@@ -172,7 +173,10 @@
         },
 
         mounted() {
-          this.fileListInit();
+            if (this.book.url != null) {
+                this.fileList = []
+                this.fileList.push({name: this.book.url})
+            }
         },
         data() {
             return {
@@ -194,13 +198,6 @@
             }
         },
         methods: {
-            fileListInit() {
-                if (this.book.url != null) {
-                    this.fileList.push({
-                        name: this.book.url
-                    })
-                }
-            },
             substract () {
                 if (this.count > 1)
                     this.count--
@@ -248,6 +245,12 @@
                 this.form.stock=this.book.stock
                 this.form.price=this.book.price
                 this.url_return = null
+
+                if (this.book.url != null) {
+                    let fileList = []
+                    fileList.push({name:this.book.url})
+                    this.fileList = fileList
+                }
             },
 
             beforeRemove (file) {
@@ -262,6 +265,10 @@
 
             onSuccess (response) {
                 this.url_return = response
+            },
+
+            onRemove () {
+                this.url_return = null
             },
 
             // ajax显示书籍详情
@@ -303,7 +310,7 @@
         watch: {
             book() {
                 this.formUpdate()
-            }
+            },
         }
     }
 </script>
