@@ -6,7 +6,7 @@ const BASE_URL = '/api'
 export const reqLogin = ({account, password}) => ajax(BASE_URL+'/user/login', {account, password}, 'POST')
 
 // 2、注册
-export const reqSignup = ({account, name, password}) => ajax(BASE_URL+'/user/signup', {account, name, password}, 'POST')
+export const reqSignup = ({account, name, password, code}) => ajax(BASE_URL+'/user/signup', {account, name, password, code}, 'POST')
 
 // 3、改变用户状态
 export const reqChangeUser = (account) => ajax(BASE_URL+'/user/change', {account}, 'POST')
@@ -81,3 +81,6 @@ export const reqDateOrderFilter = (beginDate, endDate, account) => ajax(BASE_URL
 
 // 19、日期筛选订单详情
 export const reqDateDetailOrderFilter = (beginDate, endDate, account) => ajax(BASE_URL+'/order/dateDetail', {beginDate, endDate, account})
+
+// 20、请求手机短信验证码
+export const reqPhoneCode = (phoneNumber) => ajax(BASE_URL+'/user/code', {phoneNumber})
