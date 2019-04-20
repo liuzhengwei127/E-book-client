@@ -62,6 +62,7 @@
                                         :before-remove="beforeRemove"
                                         :http-request="httpRequest"
                                         list-type="picture"
+                                        action="http://fuck"
                                         :file-list="fileList">
                                     <el-button size="small" type="primary">点击上传</el-button>
                                     <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
@@ -111,7 +112,7 @@
                     outline: '',
                     stock: undefined,
                     price: undefined,
-                    url: '',
+                    cover: '',
                     press: '',
                     year: undefined,
                     pages: undefined,
@@ -181,11 +182,11 @@
             },
 
             onSuccess (data) {
-                this.form.url = data
+                this.form.cover = data
             },
 
             onRemove () {
-                this.form.url = null
+                this.form.cover = null
             },
 
             onError (err) {

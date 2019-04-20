@@ -24,7 +24,7 @@ const actions = {
                         count: item.count,
                         price: item.price,
                         total: item.price*item.count,
-                        url: item.url
+                        cover: item.cover
                      }
                      order.push(book)
                 }
@@ -46,7 +46,7 @@ const actions = {
                         count: item.count,
                         price: item.price,
                         total: item.price*item.count,
-                        url: item.url
+                        cover: item.cover
                     }
                     order.push(book)
                 }
@@ -68,7 +68,7 @@ const actions = {
                         count: item.count,
                         price: item.price,
                         total: item.price*item.count,
-                        url: item.url
+                        cover: item.cover
                     }
                     order.push(book)
                 }

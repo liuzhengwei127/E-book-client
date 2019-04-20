@@ -25,14 +25,14 @@ export const reqAddBook = (book) => ajax(BASE_URL+'/book/add', {
     outline: book.outline,
     price: book.price,
     stock: book.stock,
-    url: book.url,
+    cover: book.cover,
     press: book.press,
     year: book.year,
     pages: book.pages,
 }, 'POST')
 
 // 7、修改书籍
-export const reqModifyBook = (book,newisbn,url) => ajax(BASE_URL+'/book/modify', {
+export const reqModifyBook = (book,newisbn,cover) => ajax(BASE_URL+'/book/modify', {
     name: book.name,
     author: book.author,
     isbn: book.isbn,
@@ -40,7 +40,7 @@ export const reqModifyBook = (book,newisbn,url) => ajax(BASE_URL+'/book/modify',
     outline: book.outline,
     price: book.price,
     stock: book.stock,
-    url: url,
+    cover: cover,
     press: book.press,
     year: book.year,
     pages: book.pages,

@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="imgbox col-md-2" style="cursor: pointer" @click="showDetail">
-                <img :src="url" class="img-thumbnail" alt="Responsive image">
+                <img :src="cover" class="img-thumbnail" alt="Responsive image">
             </div>
             <div class="col-md-6" style="cursor: pointer"  @click="showDetail">
                 <div class="card-link link">
@@ -50,7 +50,7 @@
                 <div class="mt-2">
                     <div class="row mb-3">
                         <div class="imgbox col-md-4">
-                            <img :src="url" class="img-thumbnail">
+                            <img :src="cover" class="img-thumbnail">
                         </div>
                         <div class="col-md-8">
                             <div class="name">
@@ -142,6 +142,7 @@
                                         :before-remove="beforeRemove"
                                         :http-request="httpRequest"
                                         list-type="picture"
+                                        action="/api/upload"
                                         :file-list="fileList">
                                     <el-button size="small" type="primary">点击上传</el-button>
                                     <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
@@ -175,11 +176,11 @@
         },
 
         mounted() {
-            if (this.book.url != null) {
+            if (this.book.cover != null) {
                 this.fileList = []
                 this.fileList.push({
-                    name: this.book.url,
-                    url : "http://localhost:1211/images/"+this.book.url
+                    name: this.book.cover,
+                    url : "http://localhost:1211/images/"+this.book.cover
                 })
             }
         },
@@ -199,7 +200,7 @@
                     price: this.book.price,
                 },
                 newisbn: this.book.isbn,
-                url_return: null,
+                cover_return: null,
             }
         },
         methods: {
@@ -216,7 +217,7 @@
 
             addtocart () {
                 this.$store.dispatch('ShopCart/addtocart', {
-                    url: this.book.url,
+                    cover: this.book.cover,
                     name: this.book.name,
                     author: this.book.author,
                     isbn: this.book.isbn,
@@ -232,7 +233,7 @@
             },
 
             book_modify () {
-                reqModifyBook(this.detail,this.newisbn,this.url_return).then( (data) => {
+                reqModifyBook(this.detail,this.newisbn,this.cover_return).then( () => {
                     this.$store.dispatch('Books/getAllBook')
                     this.form.isbn = this.newisbn
                     this.$message.success("成功修改书籍信息")
@@ -249,11 +250,11 @@
                 this.form.outline=this.book.outline
                 this.form.stock=this.book.stock
                 this.form.price=this.book.price
-                this.url_return = null
+                this.cover_return = null
 
-                if (this.book.url != null) {
+                if (this.book.cover != null) {
                     let fileList = []
-                    fileList.push({name:this.book.url})
+                    fileList.push({name:this.book.cover})
                     this.fileList = fileList
                 }
             },
@@ -269,11 +270,11 @@
             },
 
             onSuccess (data) {
-                this.url_return = data
+                this.cover_return = data
             },
 
             onRemove () {
-                this.url_return = null
+                this.cover_return = null
             },
 
             onError (err) {
@@ -328,10 +329,10 @@
             ...mapState({
                 isManager: state => state.Person.isManager
             }),
-            url: function () {
-                if (Object.keys(this.book).length != 0 && this.book.url != null) {
-                    let url = "/images/"+ this.book.url
-                    return url
+            cover: function () {
+                if (Object.keys(this.book).length != 0 && this.book.cover != null) {
+                    let cover = "/images/"+ this.book.cover
+                    return cover
                 }
 
                 return "./"

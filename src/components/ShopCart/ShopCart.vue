@@ -106,9 +106,9 @@
             urls: function () {
                 let urls = []
                 for (let book of this.books) {
-                    if (Object.keys(book).length != 0 && book.url != null) {
-                        let index = book.url.lastIndexOf("\\")
-                        let url = book.url.slice(index+1, book.url.length)
+                    if (Object.keys(book).length != 0 && book.cover != null) {
+                        let index = book.cover.lastIndexOf("\\")
+                        let url = book.cover.slice(index+1, book.cover.length)
                         url = "./images/"+url
                         urls.push(url)
                         continue
