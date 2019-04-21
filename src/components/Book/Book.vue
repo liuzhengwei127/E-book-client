@@ -176,7 +176,7 @@
         },
 
         mounted() {
-            if (this.book.cover != null) {
+            if (this.book.cover != null && this.book.cover != "") {
                 this.fileList = []
                 this.fileList.push({
                     name: this.book.cover,
@@ -252,9 +252,12 @@
                 this.form.price=this.book.price
                 this.cover_return = null
 
-                if (this.book.cover != null) {
+                if (this.book.cover != null && this.book.cover != "") {
                     let fileList = []
-                    fileList.push({name:this.book.cover})
+                    fileList.push({
+                        name:this.book.cover,
+                        url : "/api/images/"+this.book.cover
+                    })
                     this.fileList = fileList
                 }
             },
