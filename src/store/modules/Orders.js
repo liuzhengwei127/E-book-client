@@ -20,7 +20,7 @@ const actions = {
                 for (let item of items) {
                     const book = {
                         author: item.author,
-                        name: item.bookname,
+                        name: item.bookName,
                         count: item.count,
                         price: item.price,
                         total: item.price*item.count,
@@ -42,7 +42,7 @@ const actions = {
                 for (let item of items) {
                     const book = {
                         author: item.author,
-                        name: item.bookname,
+                        name: item.bookName,
                         count: item.count,
                         price: item.price,
                         total: item.price*item.count,
@@ -64,7 +64,7 @@ const actions = {
                 for (let item of items) {
                     const book = {
                         author: item.author,
-                        name: item.bookname,
+                        name: item.bookName,
                         count: item.count,
                         price: item.price,
                         total: item.price*item.count,

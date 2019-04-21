@@ -60,9 +60,7 @@
                 let urls = []
                 for (let book of this.order) {
                     if (Object.keys(book).length != 0 && book.cover != null) {
-                        let index = book.cover.lastIndexOf("\\")
-                        let url = book.cover.slice(index+1, book.cover.length)
-                        url = "/api/images/"+url
+                        let url = "/api/images/"+book.cover
                         urls.push(url)
                         continue
                     }
