@@ -180,7 +180,7 @@
                 this.fileList = []
                 this.fileList.push({
                     name: this.book.cover,
-                    url : "http://localhost:1211/images/"+this.book.cover
+                    url : "/api/images/"+this.book.cover
                 })
             }
         },
@@ -331,7 +331,7 @@
             }),
             cover: function () {
                 if (Object.keys(this.book).length != 0 && this.book.cover != null) {
-                    let cover = "/images/"+ this.book.cover
+                    let cover = "/api/images/"+ this.book.cover
                     return cover
                 }
 

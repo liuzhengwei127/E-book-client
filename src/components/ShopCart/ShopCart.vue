@@ -109,7 +109,7 @@
                     if (Object.keys(book).length != 0 && book.cover != null) {
                         let index = book.cover.lastIndexOf("\\")
                         let url = book.cover.slice(index+1, book.cover.length)
-                        url = "./images/"+url
+                        url = "/api/images/"+url
                         urls.push(url)
                         continue
                     }
