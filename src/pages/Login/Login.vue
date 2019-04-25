@@ -213,20 +213,9 @@
                                     this.$router.push('/home')
                                 }
                             } else {
-                                switch (data.code) {
-                                    case 0:
-                                        this.SignIn.password = ''
-                                        this.$message.error('用户不存在');
-                                        return false
-                                    case 1:
-                                        this.SignIn.password = ''
-                                        this.$message.error('密码错误');
-                                        return false
-                                    case 2:
-                                        this.SignIn.password = ''
-                                        this.$message.error('用户被禁用');
-                                        return false
-                                }
+                                this.SignIn.password = ''
+                                this.$message.error(data.message)
+                                return false
                             }
                         }).catch(() => {
                             this.$message.error("登录失败，请检查网络连接")

@@ -3,7 +3,7 @@ import ajax from './ajax'
 const BASE_URL = '/api'
 
 // 1、登录
-export const reqLogin = ({account, password}) => ajax(BASE_URL+'/user/login', {account, password}, 'POST')
+export const reqLogin = ({account, password}) => ajax(BASE_URL+'/login', {account, password}, 'POST')
 
 // 2、注册
 export const reqSignup = ({account, name, password, code}) => ajax(BASE_URL+'/user/signup', {account, name, password, code}, 'POST')
@@ -71,7 +71,7 @@ export const reqDeleteBook = (ISBN) => ajax(BASE_URL+'/book/delete', {ISBN})
 export const reqInitLogin = () => ajax(BASE_URL+'/user/init')
 
 // 16、用户登出
-export const reqLogout = () => ajax(BASE_URL+'/user/logout')
+export const reqLogout = () => ajax(BASE_URL+'/logout')
 
 // 17、搜索订单
 export const reqSearchOrder = (filter) => ajax(BASE_URL+'/order/search', {filter})
