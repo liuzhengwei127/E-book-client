@@ -1,7 +1,7 @@
 <template>
     <body class="text-center">
     <div class="center">
-        <el-form v-show="Login === 'SignIn'" :model="SignIn" label-width="80px" ref="SignIn" :rules="signin_rules">
+        <el-form v-show="Login === 'SignIn'" :model="SignIn" label-width="7em" ref="SignIn" :rules="signin_rules">
             <el-form-item>
                 <h1 class="h2 font-weight-normal mb-5">请先登录</h1>
             </el-form-item>
@@ -24,7 +24,7 @@
                 <p class="mt-5 mb-3 text-muted">&copy; 2019 上海交通大学软件学院 柳正威</p>
             </el-form-item>
         </el-form>
-        <el-form v-show="Login === 'SignUp'" :model="SignUp" :rules="signup_rules" label-width="80px" ref="SignUp">
+        <el-form v-show="Login === 'SignUp'" :model="SignUp" :rules="signup_rules" label-width="7em" ref="SignUp">
             <el-form-item>
                 <h1 class="h2 font-weight-normal mb-3">注册</h1>
             </el-form-item>
@@ -64,7 +64,10 @@
                 <p class="mt-5 mb-3 text-muted">&copy; 2019 上海交通大学软件学院 柳正威</p>
             </el-form-item>
         </el-form>
-        <el-form v-show="Login === 'FindPassword'" :model="FindPasswrod" label-width="80px" ref="FindPassword">
+        <el-form v-show="Login === 'FindPassword'" :model="FindPasswrod" label-width="7em" ref="FindPassword">
+            <el-form-item>
+                <h1 class="h2 font-weight-normal mb-5">找回密码</h1>
+            </el-form-item>
             <el-form-item label="手机号" prop="phoneNumber">
                 <el-input placeholder="请输入需要找回密码的手机号" v-model="FindPasswrod.phoneNumber"></el-input>
             </el-form-item>
