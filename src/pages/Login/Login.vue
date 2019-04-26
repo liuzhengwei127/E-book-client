@@ -1,7 +1,7 @@
 <template>
     <body class="text-center">
     <div class="center">
-        <el-form v-show="Login" :model="SignIn" label-width="80px" ref="SignIn" :rules="signin_rules">
+        <el-form v-show="Login === 'SignIn'" :model="SignIn" label-width="80px" ref="SignIn" :rules="signin_rules">
             <el-form-item>
                 <h1 class="h2 font-weight-normal mb-5">请先登录</h1>
             </el-form-item>
@@ -12,16 +12,19 @@
                 <el-input placeholder="请输入密码" v-model="SignIn.password" show-password></el-input>
             </el-form-item>
             <el-form-item>
+                <a @click="Login = 'FindPassword'">忘记密码？</a>
+            </el-form-item>
+            <el-form-item>
                 <div class="center">
                     <button class="btn btn-lg btn-primary btn-block" type="submit" @click.prevent="signin('SignIn')">登录</button>
-                    <button class="btn btn-lg btn-block" type="button" @click="Login=!Login">注册</button>
+                    <button class="btn btn-lg btn-block" type="button" @click="Login='SignUp'">注册</button>
                 </div>
             </el-form-item>
             <el-form-item>
                 <p class="mt-5 mb-3 text-muted">&copy; 2019 上海交通大学软件学院 柳正威</p>
             </el-form-item>
         </el-form>
-        <el-form v-show="!Login" :model="SignUp" :rules="signup_rules" label-width="80px" ref="SignUp">
+        <el-form v-show="Login === 'SignUp'" :model="SignUp" :rules="signup_rules" label-width="80px" ref="SignUp">
             <el-form-item>
                 <h1 class="h2 font-weight-normal mb-3">注册</h1>
             </el-form-item>
@@ -52,7 +55,7 @@
                     <button class="btn btn-lg btn-primary btn-block" type="submit" @click.prevent="signup('SignUp')">
                         <div>确认注册</div>
                     </button>
-                    <button class="btn btn-lg btn-block" type="button" @click="Login=!Login">
+                    <button class="btn btn-lg btn-block" type="button" @click="Login='SignIn'">
                         <div>返回登录</div>
                     </button>
                 </div>
@@ -61,13 +64,27 @@
                 <p class="mt-5 mb-3 text-muted">&copy; 2019 上海交通大学软件学院 柳正威</p>
             </el-form-item>
         </el-form>
+        <el-form v-show="Login === 'FindPassword'" :model="FindPasswrod" label-width="80px" ref="FindPassword">
+            <el-form-item label="手机号" prop="phoneNumber">
+                <el-input placeholder="请输入需要找回密码的手机号" v-model="FindPasswrod.phoneNumber"></el-input>
+            </el-form-item>
+            <el-form-item>
+                <div class="center">
+                    <button class="btn btn-lg btn-primary btn-block" type="submit" @click.prevent="sendMail('FindPassword')">发送邮件</button>
+                    <button class="btn btn-lg btn-block" type="button" @click="Login='SignIn'">返回登录界面</button>
+                </div>
+            </el-form-item>
+        </el-form>
     </div>
     </body>
 </template>
 
 <script>
     import {mapState} from 'vuex'
-    import {reqLogin, reqSignup, reqPhoneCode} from '../../api'
+    import {reqLogin,
+        reqSignup,
+        reqPhoneCode,
+        reqSendMail} from '../../api'
 
     export default {
         name: "Login",
@@ -122,7 +139,7 @@
             return {
                 count: 0,
                 countDown: false,
-                Login: true,
+                Login: 'SignIn',
                 SignUp: {
                     account: '',
                     name:'',
@@ -134,6 +151,9 @@
                 SignIn: {
                     account: '',
                     password: '',
+                },
+                FindPasswrod: {
+                    phoneNumber: '',
                 },
                 signup_rules: {
                     account: [
@@ -162,6 +182,11 @@
                     password: [
                         { validator: Password, trigger: 'change'}
                     ],
+                },
+                findpassword_rules: {
+                    phoneNumber: [
+                        { validator: Phone, trigger: 'blur'}
+                    ]
                 }
             }
         },
@@ -235,6 +260,7 @@
                             password: this.SignUp.password,
                             name: this.SignUp.name,
                             code: this.SignUp.code,
+                            mail: this.SignUp.email
                         }).then((data) => {
                             if (data == "注册成功") {
                                 this.$alert('注册成功', {
@@ -264,6 +290,24 @@
 
                     } else {
                         this.$message.error("请输入有效的用户名和密码")
+                        return false;
+                    }
+                })
+            },
+            sendMail(formName){
+                this.$refs[formName].validate((valid) => {
+                    if (valid) {
+                        reqSendMail(this.FindPasswrod.phoneNumber).then((data) => {
+                            if (data == "用户不存在" || data == "发送失败") {
+                                this.$message.error(data);
+                            } else {
+                                this.$message.success("成功发送邮件至"+data+", 请注意查收！")
+                            }
+                        }).catch(() => {
+                            this.$message.error("发送邮件失败")
+                        })
+                    } else {
+                        this.$message.error("请输入有效的手机号")
                         return false;
                     }
                 })
