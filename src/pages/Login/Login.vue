@@ -12,7 +12,7 @@
                 <el-input placeholder="请输入密码" v-model="SignIn.password" show-password></el-input>
             </el-form-item>
             <el-form-item>
-                <a @click="Login = 'FindPassword'">忘记密码？</a>
+                <a @click="Login = 'FindPassword'" class="text-primary" style="cursor: pointer">忘记密码？</a>
             </el-form-item>
             <el-form-item>
                 <div class="center">

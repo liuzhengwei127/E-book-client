@@ -8,7 +8,9 @@
         </div>
         <ul  class="mt-5">
             <li v-for="(book, index) in books" :key="index" class="list-unstyled mb-5">
-                <Book :book="book" :index="index"></Book>
+                <el-card shadow="hover">
+                    <Book :book="book" :index="index"></Book>
+                </el-card>
             </li>
         </ul>
         <el-dialog

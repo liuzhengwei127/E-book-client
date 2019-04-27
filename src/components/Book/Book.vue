@@ -60,7 +60,7 @@
                                 作者：{{detail.author}}
                             </div>
                             <div class="mt-1">
-                                ISBN：{{detail.ISBN}}
+                                ISBN：{{newisbn}}
                             </div>
                             <div class="mt-1">
                                 出版社:{{detail.press}}
