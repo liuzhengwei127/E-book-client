@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-      <Navbar class="mb-5"></Navbar>
+      <Navbar></Navbar>
       <router-view/>
       <ShopCart v-if="!isManager"></ShopCart>
   </div>

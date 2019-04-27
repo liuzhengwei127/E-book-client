@@ -1,5 +1,5 @@
 <template>
-    <div class="container-fluid py-5">
+    <div class="container-fluid py-5 home">
         <div class="row justify-content-center py-5">
             <div class="text-center col-md-12">
                 <div class="title">E-Book</div>
@@ -32,5 +32,11 @@
 
     .text{
         font-size: 20px;
+    }
+
+    .home{
+        height: 600px;
+        background:url('../../../public/images/home.png');
+        background-size:cover;
     }
 </style>
