@@ -1,5 +1,5 @@
 <template>
-    <div class="container-fluid py-5 home">
+    <div class="container-fluid py-5 home"  lazy="loaded">
         <div class="row justify-content-center py-5">
             <div class="text-center col-md-12">
                 <div class="title">E-Book</div>
@@ -15,7 +15,12 @@
 
 <script>
     export default {
-        name: "Home"
+        name: "Home",
+        data() {
+            return {
+                imgUrl: '../../../public/images/home.png'
+            }
+        }
     }
 </script>
 
@@ -34,7 +39,7 @@
         font-size: 20px;
     }
 
-    .home{
+    .home[lazy=loaded]{
         height: 600px;
         background:url('../../../public/images/home.png');
         background-size:cover;
