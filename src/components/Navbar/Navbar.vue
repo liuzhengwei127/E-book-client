@@ -60,7 +60,7 @@
                         </span>
                         <el-dropdown-menu slot="dropdown">
                             <el-dropdown-item>
-                                <div :class="($route.path==='/about')? 'active' : 'text-muted'" @click="$router.push('/orders')">
+                                <div :class="($route.path==='/about')? 'active' : 'text-muted'" @click="$router.push('/about')">
                                     <i class="iconfont icon-guanyu"></i>
                                     关于
                                 </div>
