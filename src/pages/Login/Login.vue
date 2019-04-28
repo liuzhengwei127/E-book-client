@@ -200,7 +200,11 @@
                     if (data == "发送成功") {
                         this.setTimer()
                     } else {
-                        this.$message.error("验证码发送失败")
+                        if (data == "手机号已被注册") {
+                            this.$message.error("手机号已被注册")
+                        } else {
+                            this.$message.error("验证码发送失败")
+                        }
                     }
                 })
             },
@@ -269,7 +273,7 @@
                                 this.$alert('注册成功', {
                                     confirmButtonText: '确定',
                                     callback: () => {
-                                        this.Login = !this.Login
+                                        this.Login = 'SignIn'
                                         this.SignUp.account = ''
                                         this.SignUp.password = ''
                                         this.SignUp.confirm_password = ''
@@ -278,8 +282,8 @@
                                     }
                                 });
                             }
-                            if (data == "账户已存在") {
-                                this.$message.error("账户已存在！")
+                            if (data == "邮箱已被注册") {
+                                this.$message.error("邮箱已被注册！")
                                 return false;
                             }
 
