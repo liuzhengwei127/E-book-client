@@ -4,7 +4,7 @@
             <div class="mt-2">
                 <i class="iconfont icon-sousuo col-md-9"></i>
             </div>
-            <input type="text" class="form-control col-md-10" v-model="filter">
+            <input placeholder="输入用户名来搜索" type="text" class="form-control col-md-10" v-model="filter">
             <button class="btn btn-primary btn-block ml-2 col-md-1" @click="searchOrder">搜索</button>
         </div>
         <ul class="list-unstyled">

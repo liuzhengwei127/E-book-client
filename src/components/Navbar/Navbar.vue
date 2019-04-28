@@ -32,10 +32,16 @@
                         用户管理
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" :class="($route.path==='/about')? 'active' : 'text-muted'" href="#/about">
-                        <i class="iconfont icon-guanyu"></i>
-                        关于
+                <li class="nav-item" v-show="isLogin">
+                    <a class="nav-link" :class="($route.path==='/orders')? 'active' : 'text-muted'" href="#/orders">
+                        <i class="iconfont icon-dingdan"></i>
+                        {{ isManager? '所有': '' }}订单
+                    </a>
+                </li>
+                <li class="nav-item" v-show="isLogin">
+                    <a class="nav-link" :class="($route.path==='/statistics')? 'active' : 'text-muted'" href="#/statistics">
+                        <i class="iconfont icon-tongji2"></i>
+                        统计
                     </a>
                 </li>
             </ul>
@@ -54,15 +60,9 @@
                         </span>
                         <el-dropdown-menu slot="dropdown">
                             <el-dropdown-item>
-                                <div :class="($route.path==='/orders')? 'active' : 'text-muted'" @click="$router.push('/orders')">
-                                    <i class="iconfont icon-dingdan"></i>
-                                    {{ isManager? '所有': '' }}订单
-                                </div>
-                            </el-dropdown-item>
-                            <el-dropdown-item>
-                                <div :class="($route.path==='/statistics')? 'active' : 'text-muted'" @click="$router.push('/statistics')">
-                                    <i class="iconfont icon-tongji2"></i>
-                                    统计
+                                <div :class="($route.path==='/about')? 'active' : 'text-muted'" @click="$router.push('/orders')">
+                                    <i class="iconfont icon-guanyu"></i>
+                                    关于
                                 </div>
                             </el-dropdown-item>
                             <el-dropdown-item divided>

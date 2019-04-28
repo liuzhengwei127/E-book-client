@@ -18,13 +18,16 @@ const actions = {
             for (let items of data) {
                 const order = []
                 for (let item of items) {
+                    let date = new Date(item.date)
                     const book = {
                         author: item.author,
                         name: item.bookName,
                         count: item.count,
                         price: item.price,
                         total: item.price*item.count,
-                        cover: item.cover
+                        cover: item.cover,
+                        userName: item.userName,
+                        date: date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()+" "+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds()
                      }
                      order.push(book)
                 }

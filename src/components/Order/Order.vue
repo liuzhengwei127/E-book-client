@@ -3,8 +3,8 @@
         <div class="container-fluid mt-4 mb-4">
             <el-row class="mb-3 mt-3">
                 <el-col :span="2"><i class="iconfont icon-dingdan"></i></el-col>
-                <el-col :span="5" v-if="isManager"><div>用户名</div></el-col>
-                <el-col :span="6"><div>时间</div></el-col>
+                <el-col :span="5" v-if="isManager"><div>用户名：{{order[0].userName}}</div></el-col>
+                <el-col :span="12"><div>时间：{{order[0] != null?order[0].date:null}}</div></el-col>
             </el-row>
             <div v-for="(book, index) in order" :key="book.name" class="">
                 <div class="row">
