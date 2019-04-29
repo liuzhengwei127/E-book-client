@@ -5,8 +5,8 @@
             <el-form-item>
                 <h1 class="h2 font-weight-normal mb-5">请先登录</h1>
             </el-form-item>
-            <el-form-item label="用户名" prop="account">
-                <el-input placeholder="请输入用户名" v-model="SignIn.account"></el-input>
+            <el-form-item label="手机号" prop="account">
+                <el-input placeholder="请输入手机号" v-model="SignIn.account"></el-input>
             </el-form-item>
             <el-form-item label="密码" prop="password">
                 <el-input placeholder="请输入密码" v-model="SignIn.password" show-password></el-input>
