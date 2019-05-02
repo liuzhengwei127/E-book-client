@@ -8,7 +8,7 @@
                             <li v-for="(book, index) in books" :key="index" class="list-unstyled mb-2 mt-1 ">
                                 <div class="row mt-3">
                                     <div class="imgbox col-md-3">
-                                        <img v-lazy="urls[index]" class="img-thumbnail">
+                                        <img v-lazy="urls[index]" :key="urls[index]" class="img-thumbnail">
                                     </div>
                                     <div class="col-md-6">
                                         <div class="col-md-12">

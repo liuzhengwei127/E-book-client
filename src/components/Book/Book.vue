@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="imgbox col-md-2" style="cursor: pointer" @click="showDetail">
-                <img v-lazy="cover" class="img-thumbnail" alt="Responsive image">
+                <img v-lazy="cover" :key="cover" class="img-thumbnail" alt="Responsive image">
             </div>
             <div class="col-md-6" style="cursor: pointer"  @click="showDetail">
                 <div class="card-link link">
@@ -50,7 +50,7 @@
                 <div class="mt-2">
                     <div class="row mb-3">
                         <div class="imgbox col-md-4">
-                            <img v-lazy="cover" class="img-thumbnail">
+                            <img v-lazy="cover" :key="cover" class="img-thumbnail">
                         </div>
                         <div class="col-md-8">
                             <div class="name">
