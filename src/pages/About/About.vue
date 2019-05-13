@@ -7,7 +7,7 @@
                 <span>
                     Some advice? Welcome to issue.
                     <i class="iconfont icon-github"></i>
-                    <a href="https://www.github.com/liuzhengwei127">五柳寄书</a>
+                    <a href="https://www.github.com/liuzhengwei127/EBook">五柳寄书的EBook</a>
                 </span>
             </div>
         </div>
