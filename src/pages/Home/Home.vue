@@ -4,7 +4,7 @@
             <div class="text-center col-md-12">
                 <div class="title">E-Book</div>
                 <div class="subtitle mb-5">一个沉浸交互式新风格线上书店</div>
-                <div class="text">你所想要的 都是我们所努力的</div>
+                <div class="text">做你自己，因为别人都有人做了。</div>
             </div>
             <div class="mt-4">
                 <button class="btn btn-primary" @click="$router.push('/books')">立即开始探索</button>
