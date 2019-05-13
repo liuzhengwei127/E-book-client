@@ -158,16 +158,16 @@
                             let dateObject = {content: ''}
                             let accountObject = {}
                             if (data.length > 0) {
-                                dateObject.timestamp = data[0].date
+                                dateObject.timestamp = data[0].date.slice(0,10)
                                 accountObject.account = data[0].account
                                 for (let order of data) {
                                     if (order.account == accountObject.account) {
-                                        if (order.date == dateObject.timestamp) {
+                                        if (order.date.slice(0,10) == dateObject.timestamp.slice(0,10)) {
                                             dateObject.content += "购买《"+order.bookName+"》×"+order.count+"  花费"+Math.round(order.amount*100)/100+"元 \n"
                                         } else {
                                             accountList.push(dateObject)
                                             dateObject = {content: ''}
-                                            dateObject.timestamp = order.date
+                                            dateObject.timestamp = order.date.slice(0,10)
                                             dateObject.content += "购买《"+order.bookName+"》×"+order.count+"  花费"+Math.round(order.amount*100)/100+"元 \n"
                                         }
                                     } else {
@@ -178,7 +178,7 @@
                                         accountObject.account = order.account
                                         accountList = []
                                         dateObject = {content: ''}
-                                        dateObject.timestamp = order.date
+                                        dateObject.timestamp = order.date.slice(0,10)
                                         dateObject.content += "购买《"+order.bookName+"》×"+order.count+"  花费"+Math.round(order.amount*100)/100+"元 \n"
                                     }
                                 }
