@@ -39,9 +39,9 @@ const actions = {
     getAllOrder({commit}) {
         reqGetAllOrder().then((data) => {
             const orders = []
-            for (let items of data.orders) {
+            for (let items of data) {
                 const order = []
-                for (let item of items) {
+                for (let item of items.orderItems) {
                     const book = {
                         author: item.author,
                         name: item.bookName,
@@ -63,9 +63,9 @@ const actions = {
     searchOrder({commit}, filter) {
         reqSearchOrder(filter).then((data) => {
             const orders = []
-            for (let items of data.orders) {
+            for (let items of data) {
                 const order = []
-                for (let item of items) {
+                for (let item of items.orderItems) {
                     const book = {
                         author: item.author,
                         name: item.bookName,
